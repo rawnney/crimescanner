@@ -1,0 +1,52 @@
+{
+  "name": "crimescanner",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "flow": "flow --show-all-errors",
+    "gitcount": "git rev-list --all --count"
+  },
+  "pre-push": [
+    "flow",
+    "gitcount"
+  ],
+  "dependencies": {
+    "react": "16.8.3",
+    "react-native": "0.59.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.4.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.0",
+    "@babel/runtime": "^7.4.2",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.5.0",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-flow": "^1.0.1",
+    "eslint-config-standard-jsx": "^6.0.2",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-flow-header": "^0.2.0",
+    "eslint-plugin-flowtype": "^3.4.2",
+    "eslint-plugin-header": "^3.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.4.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-native": "^3.6.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "flow-bin": "^0.95.1",
+    "jest": "^24.5.0",
+    "jest-cli": "^24.5.0",
+    "metro-react-native-babel-preset": "^0.53.1",
+    "pre-push": "^0.1.1",
+    "react-test-renderer": "16.8.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
