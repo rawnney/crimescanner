@@ -1,0 +1,2 @@
+// @flow
+React = require('react')
