@@ -1,5 +1,6 @@
 {
   "rules": {
-    "flow-header/flow-header": 0
+    "flow-header/flow-header": 0,
+    "no-unused-vars": 0
   }
 }
