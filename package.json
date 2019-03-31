@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "flow": "flow --show-all-errors",
-    "gitcount": "git rev-list --all --count"
+    "gitcount": "git rev-list --all --count",
+    "clean": "rm -rf node_modules && yarn && yarn start -- --reset-cache"
   },
   "pre-push": [
     "flow",
