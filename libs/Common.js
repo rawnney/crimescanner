@@ -23,7 +23,7 @@ export function truncateString (string: string, length: number): string {
   return string
 }
 
-export function truncateWords (string: string, noWords: *): string {
+export function truncateWords (string: string, noWords: number): string {
   return string.split(' ').splice(0, noWords).join(' ')
 }
 
@@ -49,7 +49,7 @@ export function mphToKmh (mph: number): * {
   return fraction(kmh)
 }
 
-export function mphToMs (mph: *): * {
+export function mphToMs (mph: number): * {
   return fraction(mph * 0.44704)
 }
 

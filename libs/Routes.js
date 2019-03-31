@@ -5,7 +5,7 @@ import CrimesNearContainer from '../components/CrimesNearContainer'
 import CrimeSearchContainer from '../components/CrimeSearchContainer'
 import CrimeForumContainer from '../components/CrimeForumContainer'
 
-export default () => ({
+export default (): Object => ({
   [HomeContainer.routeName]: HomeContainer,
   [TestContainer.routeName]: TestContainer,
   [CrimesNearContainer.routeName]: CrimesNearContainer,
