@@ -6,11 +6,15 @@ import colors from '../libs/Colors'
 import Button from './Button'
 import TestContainer from './TestContainer'
 import {goTo} from '../libs/AppNavigation'
+import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
 
 type Props = {}
 type State = {}
 
 export default class StartContainer extends PureComponent<Props, State> {
+  static navigationOptions = (state: *) => ({
+    ...getDefaultNavigationOptions(state)
+  })
   static routeName = 'StartContainer'
   render (): React$Element<View> {
     return <View style={styles.container}>
