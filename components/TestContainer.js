@@ -3,7 +3,7 @@ import {PureComponent} from 'react'
 import {StyleSheet, View} from 'react-native'
 import TextView from './TextView'
 import Button from './Button'
-import colors from '../libs/Colors'
+import colors from '../libs/colors'
 import HomeContainer from './HomeContainer'
 import {goTo} from '../libs/AppNavigation'
 

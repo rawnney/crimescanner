@@ -2,7 +2,7 @@
 import {PureComponent} from 'react'
 import {View, StyleSheet} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
-import colors from '../libs/Colors'
+import colors from '../libs/colors'
 
 type Props = {}
 
@@ -16,7 +16,6 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
   })
   render (): React$Element<View> {
     return <View style={styles.container}>
-      <View />
       <View />
     </View>
   }

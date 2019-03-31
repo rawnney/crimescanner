@@ -1,11 +1,15 @@
 // @flow
-import {PureComponent, View, StyleSheet} from 'react-native'
+import {PureComponent} from 'react'
+import {View, StyleSheet} from 'react-native'
 import ButtonWrapper from './ButtonWrapper'
 import Icon from './Icon'
 import TextView from './TextView'
+import colors from '../libs/colors'
+import commonStyles from '../libs/CommonStyles'
+import Fonts from '../libs/Fonts'
 
 type Props = {
-  onPress: () => Promise<*>,
+  onPress: Function,
   icon: string,
   titleLangKey: string,
   subtitleLangKey: string
@@ -17,10 +21,12 @@ export default class CardButton extends PureComponent<Props, State> {
   render (): React$Element<View> {
     let {onPress, icon, titleLangKey, subtitleLangKey} = this.props
     return <ButtonWrapper onPress={onPress} style={styles.container}>
-      <Icon name={icon} style={styles.iconStyle} />
+      <View style={styles.iconWrapper}>
+        <Icon name={icon} color={colors.white} />
+      </View>
       <View style={styles.textWrapper}>
-        <TextView langKey={titleLangKey} />
-        <TextView text={subtitleLangKey} />
+        <TextView langKey={titleLangKey} style={styles.title} />
+        <TextView langKey={subtitleLangKey} style={styles.subtitle} />
       </View>
     </ButtonWrapper>
   }
@@ -28,15 +34,28 @@ export default class CardButton extends PureComponent<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 120,
+    width: '100%',
     justifyContent: 'space-around',
     flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.deepSparkle
+  },
+  iconWrapper: {
+    flex: 0.6,
     alignItems: 'center'
   },
-  iconStyle: {
-    flex: 1
-  },
   textWrapper: {
-    flex: 1
+    flex: 1,
+    marginRight: commonStyles.space
+  },
+  title: {
+    ...Fonts.bold,
+    fontSize: 16,
+    color: colors.white,
+    marginBottom: commonStyles.smallSpace
+  },
+  subtitle: {
+    color: colors.white
   }
 })

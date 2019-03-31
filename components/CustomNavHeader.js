@@ -1,8 +1,8 @@
 // @flow
-import colors from '../libs/Colors'
+import colors from '../libs/colors'
 import {Component} from 'react'
 import {View, StyleSheet, StatusBar} from 'react-native'
-import {STATUS_BAR_LIGHT} from '../libs/Consts'
+import {STATUS_BAR_DARK} from '../libs/Consts'
 import BackButton from './BackButton'
 import commonStyles from '../libs/CommonStyles'
 
@@ -23,7 +23,7 @@ export default class CustomNavHeader extends Component<Props, State> {
     if (!options) return <View style={styles.container} />
     let {headerRight, headerLeft, headerStyle, headerBarTint} = options
     return <View style={[styles.container, headerStyle]}>
-      <StatusBar barStyle={headerBarTint || STATUS_BAR_LIGHT} />
+      <StatusBar barStyle={headerBarTint || STATUS_BAR_DARK} />
       <View style={styles.headerLeft}>
         {headerLeft || <BackButton />}
       </View>

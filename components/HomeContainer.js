@@ -2,13 +2,14 @@
 import {PureComponent} from 'react'
 import {StyleSheet, View} from 'react-native'
 import TextView from './TextView'
-import colors from '../libs/Colors'
+import colors from '../libs/colors'
 import Button from './Button'
 import TestContainer from './TestContainer'
 import {goTo} from '../libs/AppNavigation'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
-// import CardButton from './CardButton'
-// import CrimesNearContainer from './CrimesNearContainer'
+import CardButton from './CardButton'
+import CrimesNearContainer from './CrimesNearContainer'
+import {LOCATION_ARROW} from '../consts/Icons'
 
 type Props = {}
 type State = {}
@@ -22,17 +23,14 @@ export default class HomeContainer extends PureComponent<Props, State> {
   render (): React$Element<View> {
     return <View style={styles.container}>
       <TextView text='Logo' style={styles.logo} />
-      {/* <CardButton titleLangKey='crime_near_you_title' subtitleLangKey='crime_near_you_subtitle' onPress={this.goToCrimesNearContainer} /> */}
-      <Button text='text' onPress={this.goToTest} />
+      <CardButton onPress={this.goToCrimesNearContainer} icon={LOCATION_ARROW} titleLangKey='crime_near_you_title' subtitleLangKey='crime_near_you_subtitle' />
+      <CardButton onPress={this.goToCrimesNearContainer} icon={LOCATION_ARROW} titleLangKey='crime_near_you_title' subtitleLangKey='crime_near_you_subtitle' />
+      {/* <Button text='text' onPress={this.goToTest} /> */}
     </View>
   }
 
   goToCrimesNearContainer = () => {
-    // goTo(CrimesNearContainer)
-  }
-
-  goToTest = () => {
-    goTo(TestContainer)
+    goTo(CrimesNearContainer)
   }
 }
 
