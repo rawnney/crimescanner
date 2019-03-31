@@ -1,6 +1,6 @@
 // @flow
 import colors from '../libs/Colors'
-import React, {Component} from 'react'
+import {Component} from 'react'
 import {View, StyleSheet, StatusBar} from 'react-native'
 import {STATUS_BAR_LIGHT} from '../libs/Consts'
 import BackButton from './BackButton'

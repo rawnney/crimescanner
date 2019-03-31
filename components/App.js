@@ -1,6 +1,5 @@
 // @flow
 import {PureComponent} from 'react'
-import {View} from 'react-native'
 import {ApolloProvider} from 'react-apollo'
 import {client} from '../libs/ApolloClient'
 import {getStackNavigator} from '../libs/getStackNavigator'
@@ -13,7 +12,7 @@ type State = {}
 const AppContainer = createAppContainer(getStackNavigator())
 
 export default class App extends PureComponent<Props, State> {
-  render (): React$Element<View> {
+  render (): React$Element<*> {
     return <ApolloProvider client={client}>
       <AppContainer ref={setAppNavRef} />
     </ApolloProvider>

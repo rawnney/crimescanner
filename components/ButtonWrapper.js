@@ -1,11 +1,11 @@
 // @flow
-import React, {Component} from 'react'
+import {Component} from 'react'
 import {TouchableOpacity, StyleSheet, View} from 'react-native'
 import {doNothing} from '../libs/Common'
 
 type Props = {
   children: *,
-  onPress?: () => Promise<*>,
+  onPress?: Function,
   style?: StyleSheet,
   disable?: boolean,
   onLongPress?: Function

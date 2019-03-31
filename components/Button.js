@@ -1,6 +1,6 @@
 // @flow
-import React, {Component} from 'react'
-import {StyleSheet} from 'react-native'
+import {Component} from 'react'
+import {StyleSheet, View} from 'react-native'
 import ButtonWrapper from './ButtonWrapper'
 import TextView from './TextView'
 import commonStyles from '../libs/CommonStyles'
@@ -17,7 +17,7 @@ type Props = {
 }
 
 export default class Button extends Component <Props> {
-  render (): * {
+  render (): React$Element<View> {
     let {onPress, disable, text, langKey, style, backgroundColor, textColor} = this.props
     return <ButtonWrapper onPress={onPress} style={[styles.buttonStyle, {backgroundColor: backgroundColor || colors.black}, style]} disable={disable} >
       <TextView text={text} langKey={langKey} style={{color: textColor || colors.white}} />

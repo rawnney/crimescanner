@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from 'react'
+import {Component} from 'react'
 import {View, StyleSheet, DeviceEventEmitter} from 'react-native'
 import ScalableText from './ScalableText'
 import Fonts from '../libs/Fonts'

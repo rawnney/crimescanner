@@ -1,5 +1,4 @@
 // @flow
-import React from 'react'
 import {Dimensions, Text, StyleSheet} from 'react-native'
 
 const {width, height} = Dimensions.get('window')

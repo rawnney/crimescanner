@@ -83,7 +83,7 @@ export function randomKey (): string {
   return key() + '-' + key() + '-' + key() + '-' + key()
 }
 
-export let vibrationFeedback = (pattern?: Array<Number>): Promise<Function> => {
+export let vibrationFeedback = (pattern?: Array<number>): Promise<Function> => {
   return new Promise((resolve, reject) => {
     if (Config.enableVibration) resolve(Vibration.vibrate(pattern))
     reject(new Error('enableVibration is false'))

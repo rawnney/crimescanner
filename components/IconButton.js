@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from 'react'
+import {Component} from 'react'
 import {StyleSheet, View} from 'react-native'
 import ButtonWrapper from './ButtonWrapper'
 import Icon from './Icon'
