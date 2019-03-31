@@ -10,7 +10,7 @@ module.exports = {
   MINUS: Icons.minus,
   MINUS_CIRCLE: Icons.minusCircle,
   LOCATION_ARROW: Icons.locationArrow,
-  CHART_BAR: Icons.barChart,
+  CHART_BAR: Icons.chartBar,
   COG: Icons.cog,
   BARCODE: Icons.barcode,
   COMMENT: Icons.comment,

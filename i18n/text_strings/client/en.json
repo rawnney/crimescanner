@@ -1,5 +1,11 @@
 {
   "test": "en-test",
   "crime_near_you_title": "Crime near you",
-  "crime_near_you_subtitle": "See all the crimes and incidents around you."
+  "crime_near_you_subtitle": "See all the crimes and incidents around you.",
+  "crime_search_title": "Search",
+  "crime_search_subtitle": "Search for anything! Crimetype, location...",
+  "crime_forum_title": "Forum",
+  "crime_forum_subtitle": "Talk about whats going on with others",
+  "crime_statistics_title": "Statistics",
+  "crime_statistics_subtitle": "Check out the crime-rates and more"
 }

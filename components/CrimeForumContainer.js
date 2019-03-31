@@ -8,8 +8,8 @@ type Props = {}
 
 type State = {}
 
-export default class CrimesNearContainer extends PureComponent<Props, State> {
-  static routeName = 'CrimesNearContainer'
+export default class CrimeForumContainer extends PureComponent<Props, State> {
+  static routeName = 'CrimeForumContainer'
   static navigationOptions = (state: *) => ({
     ...getDefaultNavigationOptions(state)
   })

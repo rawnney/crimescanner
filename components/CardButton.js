@@ -34,12 +34,13 @@ export default class CardButton extends PureComponent<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    height: 120,
-    width: '100%',
+    height: 100,
+    // width: '100%',
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.deepSparkle
+    backgroundColor: colors.deepSparkle,
+    margin: commonStyles.smallSpace
   },
   iconWrapper: {
     flex: 0.6,
