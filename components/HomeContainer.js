@@ -11,14 +11,15 @@ import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
 type Props = {}
 type State = {}
 
-export default class StartContainer extends PureComponent<Props, State> {
+export default class HomeContainer extends PureComponent<Props, State> {
   static navigationOptions = (state: *) => ({
-    ...getDefaultNavigationOptions(state)
+    ...getDefaultNavigationOptions(state),
+    headerLeft: <View />
   })
-  static routeName = 'StartContainer'
+  static routeName = 'HomeContainer'
   render (): React$Element<View> {
     return <View style={styles.container}>
-      <TextView text='StartContainer' />
+      <TextView text='HomeContainer' />
       <Button text='text' onPress={this.goToTest} />
     </View>
   }

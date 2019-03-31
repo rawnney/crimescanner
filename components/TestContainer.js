@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native'
 import TextView from './TextView'
 import Button from './Button'
 import colors from '../libs/Colors'
-import StartContainer from './StartContainer'
+import HomeContainer from './HomeContainer'
 import {goTo} from '../libs/AppNavigation'
 
 type Props = {}
@@ -20,7 +20,7 @@ export default class TestContainer extends PureComponent<Props, State> {
   }
 
   goToStart = () => {
-    goTo(StartContainer)
+    goTo(HomeContainer)
   }
 }
 

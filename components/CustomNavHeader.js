@@ -36,24 +36,21 @@ export default class CustomNavHeader extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: -500,
-    // elevation: -5,
+    elevation: -5,
     justifyContent: 'space-between',
+    alignItems: 'center',
     flexDirection: 'row',
     borderWidth: 0,
     width: '100%',
     height: commonStyles.navBarHeightAndStatusBarHeight,
-    shadowColor: colors.transparent,
     borderColor: colors.transparent
   },
   headerLeft: {
     top: 10,
-    alignItems: 'flex-start',
-    flex: 0.3
+    alignItems: 'flex-start'
   },
   headerRight: {
     top: 10,
-    alignItems: 'flex-end',
-    flex: 0.3
+    alignItems: 'flex-end'
   }
 })

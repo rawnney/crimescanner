@@ -1,7 +1,7 @@
 // @flow
 import CustomNavHeader from '../components/CustomNavHeader'
 
-export let getDefaultNavigationOptions = (props: *) => {
+export let getDefaultNavigationOptions = (headerProps: *) => {
   return {
     header: (headerProps: Object) => <CustomNavHeader {...headerProps} />,
     gesturesEnabled: true,

@@ -10,7 +10,8 @@ export let getStackNavigator = () => {
   Object.keys(routes).map((key: Object) => routes[key] = {screen: routes[key]})
   routes = {...routes}
   var stackNavigatorConfig = {
-    defaultNavigationOptions: getDefaultNavigationOptions()
+    defaultNavigationOptions: getDefaultNavigationOptions(),
+    headerMode: 'screen'
   }
 
   STACK_NAVIGATOR = createStackNavigator(routes, stackNavigatorConfig)

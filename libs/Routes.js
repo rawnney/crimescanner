@@ -1,8 +1,8 @@
 // @flow
-import StartContainer from '../components/StartContainer'
+import HomeContainer from '../components/HomeContainer'
 import TestContainer from '../components/TestContainer'
 
 export default () => ({
-  [StartContainer.routeName]: StartContainer,
+  [HomeContainer.routeName]: HomeContainer,
   [TestContainer.routeName]: TestContainer
 })
