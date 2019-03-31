@@ -35,7 +35,6 @@ export default class CardButton extends PureComponent<Props, State> {
 const styles = StyleSheet.create({
   container: {
     height: 100,
-    // width: '100%',
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',
