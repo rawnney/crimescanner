@@ -2,8 +2,8 @@
 import colors from '../libs/Colors'
 import React, {Component} from 'react'
 import {View, StyleSheet, StatusBar} from 'react-native'
-// import BackButton from './BackButton'
-// import ExitButton from './ExitButton'
+import {STATUS_BAR_LIGHT} from '../libs/Consts'
+import BackButton from './BackButton'
 import commonStyles from '../libs/CommonStyles'
 
 type Props = {
@@ -23,9 +23,9 @@ export default class CustomNavHeader extends Component<Props, State> {
     if (!options) return <View style={styles.container} />
     let {headerRight, headerLeft, headerStyle, headerBarTint} = options
     return <View style={[styles.container, headerStyle]}>
-      <StatusBar barStyle={headerBarTint} />
+      <StatusBar barStyle={headerBarTint || STATUS_BAR_LIGHT} />
       <View style={styles.headerLeft}>
-        {headerLeft || <View />}
+        {headerLeft || <BackButton />}
       </View>
       <View style={styles.headerRight}>
         {headerRight}
@@ -33,8 +33,6 @@ export default class CustomNavHeader extends Component<Props, State> {
     </View>
   }
 }
-
-{ /* <BackButton /> */ }
 
 const styles = StyleSheet.create({
   container: {
@@ -45,18 +43,17 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     width: '100%',
     height: commonStyles.navBarHeightAndStatusBarHeight,
-    shadowColor: colors.black,
-    borderColor: colors.black
+    shadowColor: colors.transparent,
+    borderColor: colors.transparent
   },
   headerLeft: {
     top: 10,
-    // alignItems: 'flex-start',
-    // flex: 0.3,
-    // color: colors.black
+    alignItems: 'flex-start',
+    flex: 0.3
   },
   headerRight: {
     top: 10,
-    // alignItems: 'flex-end',
-    // flex: 0.3
+    alignItems: 'flex-end',
+    flex: 0.3
   }
 })
