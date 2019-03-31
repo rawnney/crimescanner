@@ -3,17 +3,19 @@ import {PureComponent} from 'react'
 import {View} from 'react-native'
 import {ApolloProvider} from 'react-apollo'
 import {client} from '../libs/ApolloClient'
-import AppNavigator from '../libs/AppNavigator'
-
-require('../libs/Globals')
+import {getStackNavigator} from '../libs/getStackNavigator'
+import {setAppNavRef} from '../libs/AppNavigation'
+import {createAppContainer} from 'react-navigation'
 
 type Props = {}
 type State = {}
 
+const AppContainer = createAppContainer(getStackNavigator())
+
 export default class App extends PureComponent<Props, State> {
   render (): React$Element<View> {
     return <ApolloProvider client={client}>
-      <AppNavigator />
+      <AppContainer ref={setAppNavRef} />
     </ApolloProvider>
   }
 }

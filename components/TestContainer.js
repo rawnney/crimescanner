@@ -2,24 +2,25 @@
 import {PureComponent} from 'react'
 import {StyleSheet, View} from 'react-native'
 import TextView from './TextView'
-import colors from '../libs/Colors'
 import Button from './Button'
-import TestContainer from './TestContainer'
+import colors from '../libs/Colors'
+import StartContainer from './StartContainer'
 import {goTo} from '../libs/AppNavigation'
 
 type Props = {}
 type State = {}
 
-export default class StartContainer extends PureComponent<Props, State> {
-  static routeName = 'StartContainer'
+export default class TestContainer extends PureComponent<Props, State> {
+  static routeName = 'TestContainer'
   render (): React$Element<View> {
     return <View style={styles.container}>
-      <TextView text='StartContainer' />
-      <Button text='text' onPress={this.goToTest} />
+      <TextView text='TestContainer' />
+      <Button text='text' onPress={this.goToStart} />
     </View>
   }
-  goToTest = () => {
-    goTo(TestContainer)
+
+  goToStart = () => {
+    goTo(StartContainer)
   }
 }
 

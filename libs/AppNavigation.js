@@ -1,6 +1,18 @@
 // @flow
-import idx from 'idx'
+import {NavigationActions} from 'react-navigation'
+
+let _navigator
+
+export let setAppNavRef = (navigatorRef: *) => {
+  _navigator = navigatorRef
+}
 
 export let goTo = (comp: *, params: Object) => {
-  var paramObject = idx(this, _ => _.props.navigation.state.params)
+  let routeName = comp.routeName
+  _navigator.dispatch(
+    NavigationActions.navigate({
+      routeName,
+      params
+    })
+  )
 }
