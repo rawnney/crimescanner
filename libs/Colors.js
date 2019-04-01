@@ -2,6 +2,7 @@
 export default {
   black: 'rgba(0,0,0,1)',
   white: 'rgba(255,255,255,1)',
+  gray: 'rgba(128,128,128,1)',
   transparent: 'rgba(0,0,0,0)',
   // Theme 1
   gunmetal: 'rgba(39, 48, 67, 1)',
