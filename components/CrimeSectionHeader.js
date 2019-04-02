@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: colors.deepSparkle,
     padding: commonStyles.space,
-    fontSize: 25,
+    fontSize: 16,
     color: colors.white
   }
 })

@@ -127,3 +127,11 @@ export let mapYesterdaysCrimes = (crimes: Array<Crime>) => {
   })
   return crimesYesterday
 }
+
+export let mapOtherDaysCrimes = (crimes: Array<Crime>) => {
+  let crimesOtherDays = []
+  crimes.map(crime => {
+    if (Moment.isOtherDays(crime.datetime)) crimesOtherDays.push(crime)
+  })
+  return crimesOtherDays
+}

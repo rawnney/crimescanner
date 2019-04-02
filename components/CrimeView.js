@@ -4,10 +4,9 @@ import {View, StyleSheet, SectionList} from 'react-native'
 import colors from '../libs/colors'
 import LoadingScreen from './LoadingScreen'
 import {keyExtractor} from '../libs/Common'
-// import CrimeListItem from './CrimeListItem'
+import CrimeListItem from './CrimeListItem'
 import NoCrimesView from './NoCrimesView'
-import TextView from './TextView'
-import {mapTodaysCrimes, mapYesterdaysCrimes} from '../libs/CrimeHelper'
+import {mapTodaysCrimes, mapYesterdaysCrimes, mapOtherDaysCrimes} from '../libs/CrimeHelper'
 import CrimeSectionHeader from './CrimeSectionHeader'
 
 type Props = {
@@ -17,8 +16,7 @@ type Props = {
   isCrimes: boolean
 }
 
-type State = {
-}
+type State = {}
 
 const SECTION_TODAY = 0
 const SECTION_YESTERDAY = 1
@@ -26,48 +24,45 @@ const SECTION_OTHER = 2
 
 export default class CrimeView extends PureComponent<Props, State> {
   render (): React$Element<View> {
-    let {crimes, isLoading, isCrimes} = this.props
+    let {isLoading, isCrimes} = this.props
     if (isLoading) return <LoadingScreen />
     if (!isCrimes) return <NoCrimesView />
     return <View style={styles.container}>
       <SectionList
-        renderItem={this.renderCrimeListItem} // ({item, index, section}) => <Text key={index}>{item}</Text>}
+        renderItem={this.renderCrimeListItem}
         renderSectionHeader={this.renderSectionHeader}
         sections={this.getSection()}
         keyExtractor={keyExtractor}
       />
-      {/* <FlatList
-        data={crimes}
-        renderItem={this.renderCrimeListItem}
-        keyExtractor={keyExtractor}
-      /> */}
     </View>
   }
 
   renderSectionHeader = ({section}: Object) => {
+    let {crimes} = this.props
+    let {data} = section
+    if (crimes.length === 0 || data.length === 0) return <View />
     return <CrimeSectionHeader text={section.title} />
-    // return <View>
-    //   <TextView text={section.title /* section.title */} />
-    // </View>
   }
-  /* eslint-disable react/jsx-no-bind */
+
   renderCrimeListItem = (data: Object) => {
     let {item, section, index} = data
     let {sectionType} = section
     switch (true) {
-      case sectionType === SECTION_TODAY: return <TextView text={item.title} key={index} />
-      case sectionType === SECTION_YESTERDAY: return <TextView text={item.title} key={index} />
-      case sectionType === SECTION_OTHER: return <TextView text={item.title} key={index} />
+      case sectionType === SECTION_TODAY: return this.renderCrimeItem(index, item)
+      case sectionType === SECTION_YESTERDAY: return this.renderCrimeItem(index, item)
+      case sectionType === SECTION_OTHER: return this.renderCrimeItem(index, item)
       default: return <View />
     }
-    // return <CrimeListItem onPress={() => this.onPressCrime(item)} crime={item} />
   }
+
+  /* eslint-disable react/jsx-no-bind */
+  renderCrimeItem = (index: number, item: Crime) => <CrimeListItem onPress={() => this.onPressCrime(item)} crime={item} key={index} />
 
   getSection = () => {
     let section = [
       {title: 'Today', sectionType: SECTION_TODAY, data: this.crimesToday()},
       {title: 'Yesterday', sectionType: SECTION_YESTERDAY, data: this.crimesYesterday()},
-      {title: 'Other', sectionType: SECTION_OTHER, data: ['item5', 'item6']}
+      {title: '', sectionType: SECTION_OTHER, data: this.crimesOtherDays()}
     ]
     return section
   }
@@ -75,17 +70,19 @@ export default class CrimeView extends PureComponent<Props, State> {
   crimesToday = () => {
     let {crimes} = this.props
     let crimesToday = mapTodaysCrimes(crimes)
-    console.warn(crimesToday)
     return crimesToday
-    // crimes.map((item, index) => item)
   }
 
   crimesYesterday = () => {
     let {crimes} = this.props
     let crimesYesterday = mapYesterdaysCrimes(crimes)
-    console.warn(crimesYesterday)
     return crimesYesterday
-    // crimes.map((item, index) => item)
+  }
+
+  crimesOtherDays = () => {
+    let {crimes} = this.props
+    let crimesOtherDays = mapOtherDaysCrimes(crimes)
+    return crimesOtherDays
   }
 
   onPressCrime = (item: Crime) => {
