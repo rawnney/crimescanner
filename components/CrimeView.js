@@ -5,27 +5,23 @@ import colors from '../libs/colors'
 import LoadingScreen from './LoadingScreen'
 import {keyExtractor} from '../libs/Common'
 import CrimeListItem from './CrimeListItem'
+import NoCrimesView from './NoCrimesView'
 
 type Props = {
   crimes: Array<Object>,
   isLoading: boolean,
-  onPressCrime: Function
+  onPressCrime: Function,
+  isCrimes: boolean
 }
 
 type State = {
 }
 
 export default class CrimeView extends PureComponent<Props, State> {
-  state = {}
-
-  // componentWillReceiveProps (nextProps: Props) {
-  //   if (this.props.crimes !== nextProps.crimes)
-  //     this.setState({crimes: nextProps.crimes})
-  // }
-
   render (): React$Element<View> {
-    let {crimes, isLoading} = this.props
+    let {crimes, isLoading, isCrimes} = this.props
     if (isLoading) return <LoadingScreen />
+    if (!isCrimes) return <NoCrimesView />
     return <View style={styles.container}>
       <FlatList
         data={crimes}

@@ -6,7 +6,7 @@ import {SV_DISTRICTS} from '../consts/Coordinates'
 
 export let getCrimesNearLocation = (position: Object): Promise<Array<Object>> => {
   return fetchCrimes()
-    .then((res) => {
+    .then(res => {
       return mapCrime(res).filter(key => {
         let {location} = key
         let {latitude, longitude} = location

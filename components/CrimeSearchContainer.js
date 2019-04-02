@@ -14,7 +14,7 @@ type State = {
   crimes: Array<Crime>,
   isLoading: boolean,
   text: string,
-  badRes: boolean
+  isCrimes: boolean
 }
 
 export default class CrimeSearchContainer extends PureComponent<Props, State> {
@@ -22,15 +22,15 @@ export default class CrimeSearchContainer extends PureComponent<Props, State> {
   static navigationOptions = (state: *) => ({
     ...getDefaultNavigationOptions(state)
   })
-  state = {crimes: [], isLoading: false, text: '', badRes: false}
+  state = {crimes: [], isLoading: false, text: '', isCrimes: true}
   render (): React$Element<View> {
-    let {crimes, isLoading} = this.state
+    let {crimes, isLoading, isCrimes} = this.state
     return <View style={styles.container}>
       <SearchBar onChangeText={this.searchCrime} style={styles.searchBar} placeholder={'Stöld, Trafikbrott, Rån...'} />
       <CrimeView
         crimes={crimes}
         isLoading={isLoading}
-        // badRes
+        isCrimes={isCrimes}
         onPressCrime={this.onPressCrime}
       />
       <View />
@@ -42,41 +42,24 @@ export default class CrimeSearchContainer extends PureComponent<Props, State> {
     if (findDistrict(text)) request = {location: text}
     if (findCrimeType(text)) request = {type: text}
     if (request) {
-      this.setState({isLoading: true, badRes: false})
+      this.setState({isLoading: true, crimes: [], isCrimes: true})
       getCrimesWithParams(request)
         .then(crimes => {
           if (!!crimes && crimes.length !== 0) this.setState({crimes: crimes})
-          else this.setState({badRes: true})
+          else this.setState({isCrimes: false})
         })
         .then(() => this.setState({isLoading: false}))
+        .finally(() => this.setState({isLoading: false}))
     }
   }
 
   searchCrime = (text: string) => {
     this.setState({text: text})
+    if (text === '') return
     this.getCrimesWithParams(text)
   }
 
   onPressCrime = (item: Crime) => {}
-
-  // filterList = (text: string) => {
-  //   let {crimes} = this.state
-  //   // this.setState({text: text})
-  //   if (!crimes) return
-  //   let filteredCrimes = crimes.filter(crime => {
-  //     let {type, location} = crime
-  //     let {name} = location
-  //     type = type.toLowerCase()
-  //     name.toLowerCase()
-  //     let combine = type + name
-  //     let combineReverse = name + type
-  //     let formTxt = text.toLowerCase().replace(/[ ,.]/g, '')
-  //     if (combine.toLowerCase().includes(formTxt)) return true
-  //     if (combineReverse.toLowerCase().includes(formTxt)) return true
-  //     return false
-  //   })
-  //   return this.setState({filteredCrimes: filteredCrimes})
-  // }
 }
 
 const styles = StyleSheet.create({

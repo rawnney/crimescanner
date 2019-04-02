@@ -15,16 +15,21 @@ export let fetchCrimes = (params?: Object): Promise<Object> => {
     // eslint-disable-next-line
     if (logger) console.warn(uri)
     fetch(uri)
-      .then(res => res.json())
+      .then((response, error) => {
+        if (error) return reject(error)
+        // eslint-disable-next-line
+        if (isNotProd() && logger) console.warn('Response', response)
+        return response.json()
+      })
       .then(json => {
         // eslint-disable-next-line
-        if (isNotProd() && logger) console.warn('json', json)
-        resolve(json)
+        if (isNotProd() && logger) console.warn('JSON', json)
+        return resolve(json)
       })
       .catch((err) => {
         // eslint-disable-next-line
         if (isNotProd() && logger) console.warn(err)
-        reject(err)
+        return reject(err)
       })
   })
 }

@@ -13,7 +13,8 @@ type Props = {}
 type State = {
   position: Object,
   crimes: Array<Crime>,
-  isLoading: boolean
+  isLoading: boolean,
+  isCrimes: boolean
 }
 
 export default class CrimesNearContainer extends PureComponent<Props, State> {
@@ -22,17 +23,18 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
     ...getDefaultNavigationOptions(state)
   })
 
-  state = {crimes: [], position: null, isLoading: false}
+  state = {crimes: [], position: null, isLoading: false, isCrimes: true}
 
   componentDidMount () {
     this.setPositionAndCrimes()
   }
   render (): React$Element<View> {
-    let {crimes, isLoading} = this.state
+    let {crimes, isLoading, isCrimes} = this.state
     if (isLoading) return <LoadingScreen />
     return <CrimeView
       crimes={crimes}
       isLoading={isLoading}
+      isCrimes={isCrimes}
       onPressCrime={this.onPressCrime}
     />
   }
@@ -51,6 +53,7 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
             let {position, crimes} = this.state
             if (position && crimes) this.setState({isLoading: false})
           })
+          .finally(() => this.setState({isLoading: false}))
       })
   }
 
