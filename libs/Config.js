@@ -26,7 +26,7 @@ export let isDev = (): boolean => typeof __DEV__ === 'boolean' ? __DEV__ : false
 
 export let isNotProd = (): boolean => {
   let {name} = getConfiguration()
-  return name !== 'Production' && name !== 'ProductionStage'
+  return name !== 'Production'
 }
 
 export let isDevConfig = () => {
