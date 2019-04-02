@@ -55,7 +55,6 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
             if (position && crimes) this.setState({isLoading: false})
           })
       })
-      .catch(err => err)
   }
 }
 
