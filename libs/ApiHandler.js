@@ -7,7 +7,7 @@ const __LOCATION__ = 'locationname='
 const __TYPE__ = 'type='
 const __DATETIME__ = 'DateTime='
 
-let logger = true
+let logger = false
 
 export let fetchCrimes = (params?: Object): Promise<Object> => {
   return new Promise((resolve, reject) => {

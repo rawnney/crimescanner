@@ -3,6 +3,7 @@ import {fetchCrimes} from '../libs/ApiHandler'
 import {mapCrime} from '../libs/Mapper'
 import ct from './CrimeType'
 import {SV_DISTRICTS} from '../consts/Coordinates'
+import * as Moment from './Moment'
 
 export let getCrimesNearLocation = (position: Object): Promise<Array<Object>> => {
   return fetchCrimes()
@@ -109,4 +110,20 @@ export function crimeTypeIsFound (input: string): boolean {
     if (ct[key] === input) bool = true
   })
   return bool
+}
+
+export let mapTodaysCrimes = (crimes: Array<Crime>) => {
+  let crimesToday = []
+  crimes.map(crime => {
+    if (Moment.isToday(crime.datetime)) crimesToday.push(crime)
+  })
+  return crimesToday
+}
+
+export let mapYesterdaysCrimes = (crimes: Array<Crime>) => {
+  let crimesYesterday = []
+  crimes.map(crime => {
+    if (Moment.isYesterday(crime.datetime)) crimesYesterday.push(crime)
+  })
+  return crimesYesterday
 }
