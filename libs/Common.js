@@ -89,3 +89,5 @@ export let vibrationFeedback = (pattern?: Array<number>): Promise<Function> => {
     reject(new Error('enableVibration is false'))
   })
 }
+
+export let keyExtractor = (item: Object, index: number) => index.toString()

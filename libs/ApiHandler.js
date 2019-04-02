@@ -2,31 +2,36 @@
 import {apiTimeFormat} from './Moment'
 import {isNotProd} from './Config'
 
-const baseUrl = 'https://polisen.se/api/events?'
+const baseUri = 'https://polisen.se/api/events?'
 const __LOCATION__ = 'locationname='
 const __TYPE__ = 'type='
 const __DATETIME__ = 'DateTime='
 
-export let fetchCrimes = (req: CrimeRequest): Promise<Object> => {
+let logger = true
+
+export let fetchCrimes = (params?: Object): Promise<Object> => {
   return new Promise((resolve, reject) => {
-    fetch(baseUrl + setParam(req))
+    let uri = baseUri + setParams(params)
+    // eslint-disable-next-line
+    if (logger) console.warn(uri)
+    fetch(uri)
       .then(res => res.json())
       .then(json => {
         // eslint-disable-next-line
-        if (isNotProd()) console.warn('Body', json)
+        if (isNotProd() && logger) console.warn('json', json)
         resolve(json)
       })
       .catch((err) => {
         // eslint-disable-next-line
-        if (isNotProd()) console.warn(err)
+        if (isNotProd() && logger) console.warn(err)
         reject(err)
       })
   })
 }
 
-let setParam = (req: CrimeRequest): string => {
-  let {getAll, location, type, date} = req
-  if (getAll) return ''
+let setParams = (params?: CrimeRequest): string => {
+  if (!params) return ''
+  let {location, type, date} = params
   if (location) return __LOCATION__ + location
   if (type) return __TYPE__ + type
   if (date) return __DATETIME__ + apiTimeFormat(date)

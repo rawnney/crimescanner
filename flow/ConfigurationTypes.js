@@ -1,4 +1,3 @@
-
 // @flow
 type ConfigurationTypes = {
   enableLanguageSupport: boolean,

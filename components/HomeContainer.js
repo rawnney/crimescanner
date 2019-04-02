@@ -5,7 +5,7 @@ import colors from '../libs/colors'
 import {goTo} from '../libs/AppNavigation'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
 import CardButton from './CardButton'
-import CrimesNearContainer from './CrimesNearContainer'
+import CrimeNearContainer from './CrimeNearContainer'
 import CrimeSearchContainer from './CrimeSearchContainer'
 import CrimeForumContainer from './CrimeForumContainer'
 import CrimeStatisticsContainer from './CrimeStatisticsContainer'
@@ -26,13 +26,13 @@ export default class HomeContainer extends PureComponent<Props, State> {
   render (): React$Element<View> {
     return <View style={styles.container}>
       <Icon name={BARCODE} size={50} style={styles.logo} />
-      <CardButton onPress={this.goToCrimesNearContainer} icon={LOCATION_ARROW} titleLangKey='crime_near_you_title' subtitleLangKey='crime_near_you_subtitle' />
+      <CardButton onPress={this.goToCrimeNearContainer} icon={LOCATION_ARROW} titleLangKey='crime_near_you_title' subtitleLangKey='crime_near_you_subtitle' />
       <CardButton onPress={this.goToCrimeSearchContainer} icon={SEARCH} titleLangKey='crime_search_title' subtitleLangKey='crime_search_subtitle' />
       <CardButton onPress={this.goToCrimeForumContainer} icon={COMMENT} titleLangKey='crime_forum_title' subtitleLangKey='crime_forum_subtitle' />
       <CardButton onPress={this.goToCrimeStatistics} icon={CHART_BAR} titleLangKey='crime_statistics_title' subtitleLangKey='crime_statistics_subtitle' />
     </View>
   }
-  goToCrimesNearContainer = () => goTo(CrimesNearContainer)
+  goToCrimeNearContainer = () => goTo(CrimeNearContainer)
   goToCrimeSearchContainer = () => goTo(CrimeSearchContainer)
   goToCrimeForumContainer = () => goTo(CrimeForumContainer)
   goToCrimeStatistics = () => goTo(CrimeStatisticsContainer)

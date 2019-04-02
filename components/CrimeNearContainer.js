@@ -1,18 +1,18 @@
 // @flow
 import {PureComponent} from 'react'
-import {View, StyleSheet, ScrollView} from 'react-native'
+import {View} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
-import colors from '../libs/colors'
-import TextView from './TextView'
+// import TextView from './TextView'
 import {getCrimesNearLocation} from '../libs/CrimeHelper'
 import {getPosition} from '../libs/PositionHelper'
 import LoadingScreen from './LoadingScreen'
+import CrimeView from './CrimeView'
 
 type Props = {}
 
 type State = {
   position: Object,
-  crimes: Array<Object>,
+  crimes: Array<Crime>,
   isLoading: boolean
 }
 
@@ -30,14 +30,11 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
   render (): React$Element<View> {
     let {crimes, isLoading} = this.state
     if (isLoading) return <LoadingScreen />
-    console.warn(crimes)
-    return <View style={styles.container}>
-      <ScrollView>
-        {crimes ? crimes.map((item, index) => {
-          return <TextView key={index} text={item.name} />
-        }) : <View />}
-      </ScrollView>
-    </View>
+    return <CrimeView
+      crimes={crimes}
+      isLoading={isLoading}
+      onPressCrime={this.onPressCrime}
+    />
   }
 
   setPositionAndCrimes = () => {
@@ -56,11 +53,8 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
           })
       })
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white
+  onPressCrime = (crime: Crime) => {
+    // console.warn(crime)
   }
-})
+}

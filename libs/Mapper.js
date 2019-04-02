@@ -2,6 +2,7 @@
 export let mapCrime = (obj: Object): Object => {
   return obj.map((item, index) => {
     let {location} = item
+    let title = item.name
     let {name, gps} = location
     let latitude = gps.split(',')[0]
     let longitude = gps.split(',')[1]
@@ -10,6 +11,6 @@ export let mapCrime = (obj: Object): Object => {
       latitude,
       longitude
     }
-    return {...item, location}
+    return {...item, title, location}
   })
 }

@@ -1,14 +1,14 @@
 // @flow
 import HomeContainer from '../components/HomeContainer'
 import TestContainer from '../components/TestContainer'
-import CrimesNearContainer from '../components/CrimesNearContainer'
+import CrimeNearContainer from '../components/CrimeNearContainer'
 import CrimeSearchContainer from '../components/CrimeSearchContainer'
 import CrimeForumContainer from '../components/CrimeForumContainer'
 
 export default (): Object => ({
   [HomeContainer.routeName]: HomeContainer,
   [TestContainer.routeName]: TestContainer,
-  [CrimesNearContainer.routeName]: CrimesNearContainer,
+  [CrimeNearContainer.routeName]: CrimeNearContainer,
   [CrimeSearchContainer.routeName]: CrimeSearchContainer,
   [CrimeForumContainer.routeName]: CrimeForumContainer
 })
