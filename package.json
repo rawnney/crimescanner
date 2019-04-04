@@ -55,7 +55,7 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-native": "^3.6.0",
     "eslint-plugin-standard": "^4.0.0",
-    "flow-bin": "^0.95.1",
+    "flow-bin": "0.96.0",
     "jest": "^24.5.0",
     "jest-cli": "^24.5.0",
     "jest-haste-map": "^24.5.0",
