@@ -45,6 +45,7 @@ export default class CrimeSearchContainer extends PureComponent<Props, State> {
       this.setState({isLoading: true, crimes: [], isCrimes: true})
       getCrimesWithParams(request)
         .then(crimes => {
+          this.setState({crimes: crimes})
           if (!!crimes && crimes.length !== 0) this.setState({crimes: crimes})
           else this.setState({isCrimes: false})
         })
