@@ -2,7 +2,7 @@
 import React, {Component} from 'react'
 import {View, StyleSheet} from 'react-native'
 import ButtonWrapper from './ButtonWrapper'
-import {formatCrimeDate} from '../libs/Moment'
+import moment from '../libs/moment'
 import {getCrimeIcon} from '../libs/CrimeHelper'
 import Icon from './Icon'
 import commonStyles from '../libs/CommonStyles'
@@ -27,7 +27,7 @@ export default class CrimeListItem extends Component <Props> {
           <TextView style={styles.title} text={type} />
         </View>
         <TextView style={styles.location} text={name} />
-        <TextView style={styles.date} text={formatCrimeDate(datetime)} />
+        <TextView style={styles.date} text={moment(datetime).format('DD MMM YYYY HH:MM')} />
         <TextView text={summary} />
       </View>
       <LineBreak />

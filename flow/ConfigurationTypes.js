@@ -1,5 +1,5 @@
 // @flow
 type ConfigurationTypes = {
   enableLanguageSupport: boolean,
-  enableVibration: boolean,
+  enableVibration: boolean
 }

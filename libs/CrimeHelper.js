@@ -3,7 +3,7 @@ import {fetchCrimes} from '../libs/ApiHandler'
 import {mapCrime} from '../libs/Mapper'
 import ct from './CrimeType'
 import {SV_DISTRICTS} from '../consts/Coordinates'
-import * as Moment from './Moment'
+import * as Moment from './moment'
 
 export let getCrimesNearLocation = (position: Object): Promise<Array<Object>> => {
   return fetchCrimes()
