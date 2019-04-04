@@ -1,13 +1,14 @@
 // @flow
 import {apiTimeFormat} from './moment'
 import {isNotProd} from './Config'
+import {isEmulator} from './Common'
 
 const baseUri = 'https://polisen.se/api/events?'
 const __LOCATION__ = 'locationname='
 const __TYPE__ = 'type='
 const __DATETIME__ = 'DateTime='
 
-let logger = true
+let logger = isNotProd() && isEmulator()
 
 export let fetchCrimes = (params?: Object): Promise<Object> => {
   return new Promise((resolve, reject) => {
