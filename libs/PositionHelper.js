@@ -1,6 +1,6 @@
 // @flow
 import {NO_COORDS, STOCKHOLM_DISTRICT} from '../consts/Coordinates'
-import {isNotProd} from './Config'
+import {isEmulator} from './Common'
 
 const distance = -5
 
@@ -8,7 +8,7 @@ export let getPosition = (): Promise<Object> => {
   return new Promise((resolve, reject): Object => {
     navigator.geolocation.getCurrentPosition(pos => {
       let position = pos.coords
-      if (isNotProd()) {
+      if (isEmulator()) {
         position = STOCKHOLM_DISTRICT.coords
         position = {
           name: STOCKHOLM_DISTRICT.name,
