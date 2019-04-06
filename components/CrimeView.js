@@ -18,7 +18,7 @@ type State = {}
 
 export default class CrimeView extends PureComponent<Props, State> {
   render (): React$Element<View> {
-    let {crimes, isLoading, isCrimes} = this.props
+    let {crimes, isLoading} = this.props
     if (isLoading) return <LoadingScreen />
     return <View style={styles.container}>
       <FlatList

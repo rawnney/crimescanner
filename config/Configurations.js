@@ -2,13 +2,15 @@
 
 let baseFeatureConfig = {
   enableLanguageSupport: false,
-  enableVibration: false
+  enableVibration: false,
+  enableLogger: false
 }
 
 let baseConfiguration = {}
 
 let Development = {
   ...baseConfiguration,
+  enableLogger: true,
   name: 'Development',
   features: {
     ...baseFeatureConfig

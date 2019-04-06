@@ -7,6 +7,8 @@ import {getCrimesNearLocation} from '../libs/CrimeHelper'
 import {getPosition} from '../libs/PositionHelper'
 import LoadingScreen from './LoadingScreen'
 import CrimeView from './CrimeView'
+import * as PermissionsHelper from '../libs/PermissionHelper'
+import {logger, isEmulator} from '../libs/Common'
 
 type Props = {}
 
@@ -26,7 +28,31 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
   state = {crimes: [], position: null, isLoading: false, isCrimes: true}
 
   componentDidMount () {
-    this.setPositionAndCrimes()
+    PermissionsHelper.checkForLocationPermission().then((responseCheck: boolean) => {
+      if (!responseCheck) //  === 'false'
+        PermissionsHelper.requestPermission('location').then((responseRequest) => {
+          logger(responseRequest)
+          if (responseRequest)
+            logger('allgood???')
+        }).catch(() => {
+          logger('ERROR')
+        })
+      else
+        logger('allgood')
+    }).catch((error) => {
+      logger(error)
+      if (!isEmulator()) {
+        if (error)
+          PermissionsHelper.requestPermission(error.permType).then(() => logger('allgood!'))
+            .catch((error) => {
+              logger(error)
+              // pop()
+            })
+      } else
+        logger('allgoodEND')
+    })
+
+    // this.setPositionAndCrimes()
   }
   render (): React$Element<View> {
     let {crimes, isLoading, isCrimes} = this.state
