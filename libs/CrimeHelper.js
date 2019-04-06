@@ -21,7 +21,7 @@ export let getCrimesWithParams = (params: Object): Promise<Object> => {
 }
 
 export let getCrimeIcon = (type: string): string => {
-  let crime = CRIME_TYPE.find(obj => obj.key === type)
+  let crime = CRIME_TYPE.find(obj => obj.param.includes(type))
   if (!!crime && !!crime.icon) return crime.icon
   return ''
 }
