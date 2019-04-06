@@ -2,8 +2,6 @@
 import React, {Component} from 'react'
 import {View, StyleSheet} from 'react-native'
 import ButtonWrapper from './ButtonWrapper'
-import moment from '../libs/moment'
-import {getCrimeIcon} from '../libs/CrimeHelper'
 import Icon from './Icon'
 import commonStyles from '../libs/CommonStyles'
 import LineBreak from './LineBreak'
@@ -18,16 +16,16 @@ type Props = {
 export default class CrimeListItem extends Component <Props> {
   render (): React$Element<View> {
     let {crime, onPress} = this.props
-    let {type, datetime, location, summary} = crime
+    let {type, location, summary, icon, displayTime} = crime
     let {name} = location
     return <ButtonWrapper onPress={onPress}>
       <View style={styles.wrapper}>
         <View style={styles.iconTypeWrapper}>
-          <Icon name={getCrimeIcon(type)} iconStyle={styles.icon} />
+          <Icon name={icon} iconStyle={styles.icon} />
           <TextView style={styles.title} text={type} />
         </View>
         <TextView style={styles.location} text={name} />
-        <TextView style={styles.date} text={moment(datetime).format('DD MMM YYYY HH:MM')} />
+        <TextView style={styles.date} text={displayTime} />
         <TextView text={summary} />
       </View>
       <LineBreak />

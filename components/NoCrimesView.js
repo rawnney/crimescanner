@@ -5,9 +5,14 @@ import TextView from './TextView'
 import colors from '../libs/colors'
 import commonStyles from '../libs/CommonStyles'
 
-export default class NoCrimesView extends Component <*> {
+type Props = {
+  style?: StyleSheet
+}
+
+export default class NoCrimesView extends Component<Props> {
   render (): React$Element<View> {
-    return <View style={styles.container}>
+    let {style} = this.props
+    return <View style={[styles.container, style]}>
       <TextView langKey='no_crime_found_text' style={styles.text} />
       <TextView langKey='no_crime_found_emoji' style={styles.emoji} />
     </View>

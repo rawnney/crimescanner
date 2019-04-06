@@ -62,7 +62,7 @@ export function transformText (text: string, textTransform?: string = 'capitaliz
   }
 }
 
-export function delay (time: number, res: *): Promise<Object> {
+export let delay = (time: number, res: *): Promise<Object> => {
   return new Promise(resolve => setTimeout(() => resolve(res), time))
 }
 

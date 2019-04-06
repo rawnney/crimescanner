@@ -1,5 +1,5 @@
 // @flow
-import {apiTimeFormat} from './moment'
+import {formatTime} from './moment'
 import {isNotProd} from './Config'
 import {isEmulator} from './Common'
 
@@ -38,8 +38,8 @@ export let fetchCrimes = (params?: Object): Promise<Object> => {
 let setParams = (params?: CrimeRequest): string => {
   if (!params) return ''
   let {location, type, date} = params
-  if (location) return __LOCATION__ + location
-  if (type) return __TYPE__ + type
-  if (date) return __DATETIME__ + apiTimeFormat(date)
+  if (location) return (__LOCATION__ + location).replace(/ /g, '%20')
+  if (type) return (__TYPE__ + type).replace(/ /g, '%20')
+  if (date) return __DATETIME__ + formatTime(date)
   return ''
 }
