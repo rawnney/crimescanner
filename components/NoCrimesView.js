@@ -22,6 +22,7 @@ export default class NoCrimesView extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: 200,
     justifyContent: 'center',
     backgroundColor: colors.white
   },

@@ -50,8 +50,8 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
         getCrimesNearLocation(position)
           .then(crimes => {
             this.setState({crimes: crimes})
-            if (!!crimes && crimes.length !== 0) this.setState({crimes: crimes})
-            else this.setState({isCrimes: false})
+            if (!!crimes && crimes.length !== 0) return this.setState({crimes: crimes})
+            return this.setState({isCrimes: false})
           })
           .then(() => {
             let {position, crimes} = this.state

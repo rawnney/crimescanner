@@ -26,7 +26,7 @@ export default class CrimeView extends PureComponent<Props, State> {
         renderItem={this.renderCrimeItem}
         ListEmptyComponent={this.renderEmptyState}
         keyExtractor={keyExtractor}
-        contentContainerStyle={!isCrimes ? styles.contentContainerStyle : undefined}
+        contentContainerStyle={styles.contentContainerStyle}
       />
     </View>
   }
@@ -52,6 +52,5 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white
   },
   contentContainerStyle: {
-    flex: 1
   }
 })
