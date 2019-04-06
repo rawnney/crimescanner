@@ -124,7 +124,7 @@ export const SV_DISTRICTS = [
   {name: 'Leksand', coords: {latitude: '60.7318959', longitude: '15.0015186'}},
   {name: 'Lerum', coords: {latitude: '57.8456196', longitude: '12.2039949'}},
   {name: 'Lessebo', coords: {latitude: '56.7503404', longitude: '15.0384608'}},
-  {name: 'Lidingö', coords: {latitude: '59.3646167', longitude: '18.1225791'}},
+  {name: 'Lidingö', coords: {latitude: '59.36296', longitude: '18.1468'}},
   {name: 'Lidköping', coords: {latitude: '58.5102516', longitude: '13.0778445'}},
   {name: 'Lilla Edet', coords: {latitude: '58.14185', longitude: '12.0387054'}},
   {name: 'Lindesberg', coords: {latitude: '59.597698', longitude: '15.222911'}},
