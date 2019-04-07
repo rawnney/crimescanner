@@ -2,7 +2,7 @@
 import {PureComponent} from 'react'
 import {View, StyleSheet, FlatList} from 'react-native'
 import colors from '../libs/Colors'
-import LoadingScreen from './LoadingScreen'
+import LoadingView from './LoadingView'
 import {keyExtractor} from '../libs/Common'
 import CrimeListItem from './CrimeListItem'
 import NoCrimesView from './NoCrimesView'
@@ -19,7 +19,7 @@ type State = {}
 export default class CrimeView extends PureComponent<Props, State> {
   render (): React$Element<View> {
     let {crimes, isLoading} = this.props
-    if (isLoading) return <LoadingScreen />
+    if (isLoading) return <LoadingView />
     return <View style={styles.container}>
       <FlatList
         data={crimes}

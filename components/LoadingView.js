@@ -9,7 +9,7 @@ type Props = {
   loadingWrapper?: StyleSheet
 }
 
-export default class LoadingScreen extends Component<Props> {
+export default class LoadingView extends Component<Props> {
   render (): React$Element<View> {
     let {textStyle, loadingWrapper} = this.props
     return <View style={[styles.wrapper, loadingWrapper]}>

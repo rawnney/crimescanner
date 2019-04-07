@@ -30,6 +30,7 @@ export default class IconTextButton extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
     padding: commonStyles.space
   },
   text: {

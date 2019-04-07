@@ -2,7 +2,7 @@
 import {PureComponent} from 'react'
 import {View, StyleSheet, SectionList, FlatList} from 'react-native'
 import colors from '../libs/Colors'
-// import LoadingScreen from './LoadingScreen'
+// import isLoading from './isLoading'
 import {keyExtractor} from '../libs/Common'
 import CrimeListItem from './CrimeListItem'
 // import NoCrimesView from './NoCrimesView'
@@ -36,7 +36,7 @@ export default class CrimeViewExperimental extends PureComponent<Props, State> {
 
   render (): React$Element<View> {
     // let {isLoading, isCrimes} = this.props
-    // if (isLoading) return <LoadingScreen />
+    // if (isLoading) return <isLoading />
     // if (!isCrimes) return <NoCrimesView />
     return <View style={styles.container}>
       {/* {Config.enableCrimeSectionList ? this.renderSectionList() : this.renderFlatList()} */}

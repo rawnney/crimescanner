@@ -6,10 +6,14 @@ import CrimeSearchContainer from '../components/CrimeSearchContainer'
 import CrimeForumContainer from '../components/CrimeForumContainer'
 import GeneralErrorContainer from '../components/GeneralErrorContainer'
 import StartContainer from '../components/StartContainer'
+import SignUpContainer from '../components/SignUpContainer'
+import LoginContainer from '../components/LoginContainer'
 
 export default (): Object => ({
   [StartContainer.routeName]: StartContainer,
   [HomeContainer.routeName]: HomeContainer,
+  [SignUpContainer.routeName]: SignUpContainer,
+  [LoginContainer.routeName]: LoginContainer,
   [CrimeNearContainer.routeName]: CrimeNearContainer,
   [CrimeSearchContainer.routeName]: CrimeSearchContainer,
   [CrimeForumContainer.routeName]: CrimeForumContainer,

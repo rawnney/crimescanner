@@ -10,6 +10,7 @@ export let getStackNavigator = () => {
   Object.keys(routes).map((key: Object) => routes[key] = {screen: routes[key]})
   routes = {...routes}
   var stackNavigatorConfig = {
+    initialRouteName: 'SignUpContainer', // HomeContainer
     defaultNavigationOptions: getDefaultNavigationOptions(),
     headerMode: 'screen'
   }

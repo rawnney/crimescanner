@@ -7,7 +7,7 @@ export let setAppNavRef = (navigatorRef: *) => {
   _navigator = navigatorRef
 }
 
-export let goTo = (comp: *, params: Object) => {
+export let goTo = (comp: *, params: Object): Promise<Object> => {
   let routeName = comp.routeName
   _navigator.dispatch(
     NavigationActions.navigate({
@@ -15,4 +15,5 @@ export let goTo = (comp: *, params: Object) => {
       params
     })
   )
+  return Promise.resolve()
 }

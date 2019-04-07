@@ -4,7 +4,7 @@ import {View} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
 import {getCrimesNearLocation} from '../libs/CrimeHelper'
 import {getPosition} from '../libs/PositionHelper'
-import LoadingScreen from './LoadingScreen'
+import LoadingView from './LoadingView'
 import CrimeView from './CrimeView'
 import * as PermissionsHelper from '../libs/PermissionHelper'
 import PermissionView from './PermissionView'
@@ -43,7 +43,7 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
   render (): React$Element<View> {
     let {crimes, isLoading, isCrimes, hasPermission} = this.state
     if (!hasPermission) return <PermissionView onPress={this.openPermissions} />
-    if (isLoading) return <LoadingScreen />
+    if (isLoading) return <LoadingView />
     return <CrimeView
       crimes={crimes}
       isLoading={isLoading}
