@@ -6,6 +6,8 @@
 .*/Libraries/react-native/React.js
 .*/Libraries/polyfills/.*
 .*/node_modules/metro/.*
+.*/node_modules/react-native-firebase/
+.*/node_modueles/react-native-permissions/
 
 [include]
 
