@@ -1,6 +1,6 @@
 // @flow
 import {isIOS} from '../libs/Common'
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 
 let space = 15
 let smallSpace = space / 2

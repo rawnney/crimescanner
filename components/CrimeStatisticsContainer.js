@@ -2,7 +2,7 @@
 import {PureComponent} from 'react'
 import {View, StyleSheet} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 
 type Props = {}
 

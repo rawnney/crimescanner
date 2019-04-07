@@ -2,7 +2,7 @@
 import React, {Component} from 'react'
 import {StyleSheet, View, ActivityIndicator} from 'react-native'
 import TextView from './TextView'
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 
 type Props = {
   textStyle?: StyleSheet,

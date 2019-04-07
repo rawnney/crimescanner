@@ -4,7 +4,7 @@ import ReactNative, {StyleSheet, View} from 'react-native'
 import IconButton from './IconButton'
 import commonStyles from '../libs/CommonStyles'
 import {CROSS} from '../consts/Icons'
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 
 type Props = {
   onChangeText?: Function,

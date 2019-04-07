@@ -2,7 +2,7 @@
 import {PureComponent} from 'react'
 import {View, StyleSheet} from 'react-native'
 import TextView from './TextView'
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 import commonStyles from '../libs/CommonStyles'
 
 type Props = {

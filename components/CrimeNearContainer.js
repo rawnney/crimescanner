@@ -2,13 +2,12 @@
 import {PureComponent} from 'react'
 import {View} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
-// import TextView from './TextView'
 import {getCrimesNearLocation} from '../libs/CrimeHelper'
 import {getPosition} from '../libs/PositionHelper'
 import LoadingScreen from './LoadingScreen'
 import CrimeView from './CrimeView'
 import * as PermissionsHelper from '../libs/PermissionHelper'
-import {logger, isEmulator} from '../libs/Common'
+import PermissionView from './PermissionView'
 
 type Props = {}
 
@@ -16,7 +15,8 @@ type State = {
   position: Object,
   crimes: Array<Crime>,
   isLoading: boolean,
-  isCrimes: boolean
+  isCrimes: boolean,
+  hasPermission: boolean
 }
 
 export default class CrimesNearContainer extends PureComponent<Props, State> {
@@ -25,37 +25,28 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
     ...getDefaultNavigationOptions(state)
   })
 
-  state = {crimes: [], position: null, isLoading: false, isCrimes: true}
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      crimes: [],
+      position: null,
+      isLoading: false,
+      isCrimes: true,
+      hasPermission: false
+    }
+  }
 
   componentDidMount () {
-    PermissionsHelper.checkForLocationPermission().then((responseCheck: boolean) => {
-      if (!responseCheck) //  === 'false'
-        PermissionsHelper.requestPermission('location').then((responseRequest) => {
-          logger(responseRequest)
-          if (responseRequest)
-            logger('allgood???')
-        }).catch(() => {
-          logger('ERROR')
-        })
-      else
-        logger('allgood')
-    }).catch((error) => {
-      logger(error)
-      if (!isEmulator()) {
-        if (error)
-          PermissionsHelper.requestPermission(error.permType).then(() => logger('allgood!'))
-            .catch((error) => {
-              logger(error)
-              // pop()
-            })
-      } else
-        logger('allgoodEND')
-    })
-
-    // this.setPositionAndCrimes()
+    let {hasPermission} = this.state
+    this.checkPermission()
+      .then(() => {
+        if (hasPermission === true) this.setPositionAndCrimes()
+      })
   }
+
   render (): React$Element<View> {
-    let {crimes, isLoading, isCrimes} = this.state
+    let {crimes, isLoading, isCrimes, hasPermission} = this.state
+    if (!hasPermission === false) return <PermissionView onPress={this.openPermissions} />
     if (isLoading) return <LoadingScreen />
     return <CrimeView
       crimes={crimes}
@@ -66,6 +57,8 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
   }
 
   setPositionAndCrimes = () => {
+    let {hasPermission} = this.state
+    if (hasPermission === false) return
     this.setState({isLoading: true})
     getPosition()
       .then(position => {
@@ -87,7 +80,14 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
       })
   }
 
+  async checkPermission () {
+    const responseCheck = await PermissionsHelper.checkForLocationPermission()
+    if (responseCheck) this.setState({hasPermission: responseCheck})
+  }
+
   onPressCrime = (crime: Crime) => {
     // console.warn(crime)
   }
+
+  openPermissions = () => PermissionsHelper.openPermissionSettings()
 }

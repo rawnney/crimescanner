@@ -1,7 +1,7 @@
 // @flow
 import {PureComponent} from 'react'
 import {StyleSheet, View} from 'react-native'
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 import {goTo} from '../libs/AppNavigation'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
 import CardButton from './CardButton'
@@ -32,6 +32,7 @@ export default class HomeContainer extends PureComponent<Props, State> {
       <CardButton onPress={this.goToCrimeStatistics} icon={CHART_BAR} titleLangKey='crime_statistics_title' subtitleLangKey='crime_statistics_subtitle' />
     </View>
   }
+
   goToCrimeNearContainer = () => goTo(CrimeNearContainer)
   goToCrimeSearchContainer = () => goTo(CrimeSearchContainer)
   goToCrimeForumContainer = () => goTo(CrimeForumContainer)

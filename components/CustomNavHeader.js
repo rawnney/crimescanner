@@ -1,5 +1,5 @@
 // @flow
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 import {Component} from 'react'
 import {View, StyleSheet, StatusBar} from 'react-native'
 import {STATUS_BAR_DARK} from '../libs/Consts'

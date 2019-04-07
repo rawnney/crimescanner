@@ -1,7 +1,7 @@
 // @flow
 import {PureComponent} from 'react'
 import {View, StyleSheet, FlatList} from 'react-native'
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 import LoadingScreen from './LoadingScreen'
 import {keyExtractor} from '../libs/Common'
 import CrimeListItem from './CrimeListItem'

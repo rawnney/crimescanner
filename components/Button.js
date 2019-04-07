@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native'
 import ButtonWrapper from './ButtonWrapper'
 import TextView from './TextView'
 import commonStyles from '../libs/CommonStyles'
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 
 type Props = {
   onPress?: Function,

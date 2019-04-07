@@ -18,7 +18,7 @@ export function isWeb (): boolean {
   return Platform.OS === 'web'
 }
 
-export function isEmulator (): boolean {
+export let isEmulator = (): boolean => {
   if (DeviceInfo.isEmulator()) return true
   return false
 }

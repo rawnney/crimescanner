@@ -4,7 +4,7 @@ import {View, StyleSheet} from 'react-native'
 import ButtonWrapper from './ButtonWrapper'
 import Icon from './Icon'
 import TextView from './TextView'
-import colors from '../libs/colors'
+import colors from '../libs/Colors'
 import commonStyles from '../libs/CommonStyles'
 import Fonts from '../libs/Fonts'
 
