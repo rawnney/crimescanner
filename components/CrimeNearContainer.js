@@ -37,16 +37,12 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
   }
 
   componentDidMount () {
-    let {hasPermission} = this.state
-    this.checkPermission()
-      .then(() => {
-        if (hasPermission === true) this.setPositionAndCrimes()
-      })
+    this.checkPermissionAndGetCrimes()
   }
 
   render (): React$Element<View> {
     let {crimes, isLoading, isCrimes, hasPermission} = this.state
-    if (!hasPermission === false) return <PermissionView onPress={this.openPermissions} />
+    if (!hasPermission) return <PermissionView onPress={this.openPermissions} />
     if (isLoading) return <LoadingScreen />
     return <CrimeView
       crimes={crimes}
@@ -57,8 +53,6 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
   }
 
   setPositionAndCrimes = () => {
-    let {hasPermission} = this.state
-    if (hasPermission === false) return
     this.setState({isLoading: true})
     getPosition()
       .then(position => {
@@ -80,9 +74,13 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
       })
   }
 
-  async checkPermission () {
-    const responseCheck = await PermissionsHelper.checkForLocationPermission()
-    if (responseCheck) this.setState({hasPermission: responseCheck})
+  checkPermissionAndGetCrimes = () => {
+    PermissionsHelper.checkForLocationPermission()
+      .then((status) => this.setState({hasPermission: status}))
+      .then(() => {
+        let {hasPermission} = this.state
+        if (hasPermission) this.setPositionAndCrimes()
+      })
   }
 
   onPressCrime = (crime: Crime) => {
