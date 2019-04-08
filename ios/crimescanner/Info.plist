@@ -38,7 +38,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>We use your location to locate crimes near you</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>fa-brands-400.ttf</string>
