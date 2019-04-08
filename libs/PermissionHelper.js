@@ -23,9 +23,4 @@ let checkForPermissions = (type: string): Promise<boolean> => {
   })
 }
 
-export let requestPermission = (type: string) => {
-  return Permissions.checkForPermissions(type)
-    .then(response => Promise.resolve(response))
-}
-
 export let openPermissionSettings = () => openURL('app-settings:')

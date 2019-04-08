@@ -1,26 +1,19 @@
 // @flow
 import {PureComponent} from 'react'
-import {ApolloProvider} from 'react-apollo'
-import ApolloClient from 'apollo-boost'
-// import {client} from '../libs/ApolloClient'
-import {getStackNavigator} from '../libs/getStackNavigator'
+import {Provider} from 'react-redux'
 import {setAppNavRef} from '../libs/AppNavigation'
-import {createAppContainer} from 'react-navigation'
-import {GQL_SIMPLE_API_KEY} from '../consts/ApiKeys'
+import {createStore} from '../libs/Store'
+import {AppContainer} from '../libs/getStackNavigator'
 
 type Props = {}
 type State = {}
 
-const AppContainer = createAppContainer(getStackNavigator())
-
-const localClient = new ApolloClient({
-  uri: GQL_SIMPLE_API_KEY
-})
+let store = createStore()
 
 export default class App extends PureComponent<Props, State> {
   render (): React$Element<*> {
-    return <ApolloProvider client={localClient}>
+    return <Provider store={store}>
       <AppContainer ref={setAppNavRef} />
-    </ApolloProvider>
+    </Provider>
   }
 }

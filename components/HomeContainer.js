@@ -13,9 +13,7 @@ import {LOCATION_ARROW, SEARCH, COMMENT, CHART_BAR, BARCODE} from '../consts/Ico
 import Icon from './Icon'
 import commonStyles from '../libs/CommonStyles'
 
-type Props = {
-  // user: *
-}
+type Props = {}
 type State = {}
 
 export default class HomeContainer extends PureComponent<Props, State> {

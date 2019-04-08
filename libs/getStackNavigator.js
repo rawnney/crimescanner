@@ -1,7 +1,7 @@
 // @flow
-import {createStackNavigator} from 'react-navigation'
-import getRoutes from './Routes'
+import {createStackNavigator, createAppContainer} from 'react-navigation'
 import {getDefaultNavigationOptions} from './getDefaultNavigationOptions'
+import getRoutes from './Routes'
 
 let STACK_NAVIGATOR
 export let getStackNavigator = () => {
@@ -10,7 +10,7 @@ export let getStackNavigator = () => {
   Object.keys(routes).map((key: Object) => routes[key] = {screen: routes[key]})
   routes = {...routes}
   var stackNavigatorConfig = {
-    initialRouteName: 'SignUpContainer', // HomeContainer
+    initialRouteName: 'StartContainer',
     defaultNavigationOptions: getDefaultNavigationOptions(),
     headerMode: 'screen'
   }
@@ -18,3 +18,5 @@ export let getStackNavigator = () => {
   STACK_NAVIGATOR = createStackNavigator(routes, stackNavigatorConfig)
   return STACK_NAVIGATOR
 }
+
+export const AppContainer = createAppContainer(getStackNavigator())

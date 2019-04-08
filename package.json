@@ -7,20 +7,17 @@
     "test": "jest",
     "flow": "flow --show-all-errors",
     "gitcount": "git rev-list --all --count",
-    "clean": "rm -rf node_modules && yarn && yarn start -- --reset-cache"
+    "pod": "cd ios && pod install --repo-update",
+    "clean": "rm -rf node_modules && yarn && yarn start --reset-cache"
   },
   "pre-push": [
     "flow",
     "gitcount"
   ],
   "dependencies": {
-    "apollo-boost": "^0.3.1",
-    "graphql": "^14.2.0",
-    "graphql-tag": "^2.10.1",
     "idx": "^2.5.5",
     "moment": "^2.24.0",
     "react": "^16.8.6",
-    "react-apollo": "^2.5.2",
     "react-art": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-native": "^0.59.3",
@@ -32,7 +29,11 @@
     "react-native-permissions": "^1.1.1",
     "react-native-screens": "^1.0.0-alpha.22",
     "react-native-web": "^0.11.2",
-    "react-navigation": "^3.5.1"
+    "react-navigation": "^3.5.1",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
