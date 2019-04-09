@@ -22,10 +22,10 @@ export default class CrimeListItem extends Component <Props> {
       <View style={styles.wrapper}>
         <View style={styles.iconTypeWrapper}>
           <Icon name={icon} iconStyle={styles.icon} />
-          <TextView style={styles.title} text={type} />
+          <TextView text={type} style={styles.title} />
         </View>
-        <TextView style={styles.location} text={name} />
-        <TextView style={styles.date} text={displayTime} />
+        <TextView text={name} style={styles.location} />
+        <TextView text={displayTime} style={styles.date} />
         <TextView text={summary} />
       </View>
       <LineBreak />

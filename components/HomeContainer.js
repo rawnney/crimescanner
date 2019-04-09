@@ -26,10 +26,12 @@ export default class HomeContainer extends PureComponent<Props, State> {
   render (): React$Element<View> {
     return <View style={styles.container}>
       <Icon name={BARCODE} size={50} style={styles.logo} />
-      <CardButton onPress={this.goToCrimeNearContainer} icon={LOCATION_ARROW} titleLangKey='crime_near_you_title' subtitleLangKey='crime_near_you_subtitle' />
-      <CardButton onPress={this.goToCrimeSearchContainer} icon={SEARCH} titleLangKey='crime_search_title' subtitleLangKey='crime_search_subtitle' />
-      <CardButton onPress={this.goToCrimeForumContainer} icon={COMMENT} titleLangKey='crime_forum_title' subtitleLangKey='crime_forum_subtitle' />
-      <CardButton onPress={this.goToCrimeStatistics} icon={CHART_BAR} titleLangKey='crime_statistics_title' subtitleLangKey='crime_statistics_subtitle' />
+      <View style={styles.wrapper}>
+        <CardButton onPress={this.goToCrimeNearContainer} icon={LOCATION_ARROW} titleLangKey='crime_near_you_title' subtitleLangKey='crime_near_you_subtitle' />
+        <CardButton onPress={this.goToCrimeSearchContainer} icon={SEARCH} titleLangKey='crime_search_title' subtitleLangKey='crime_search_subtitle' />
+        <CardButton onPress={this.goToCrimeForumContainer} icon={COMMENT} titleLangKey='crime_forum_title' subtitleLangKey='crime_forum_subtitle' />
+        <CardButton onPress={this.goToCrimeStatistics} icon={CHART_BAR} titleLangKey='crime_statistics_title' subtitleLangKey='crime_statistics_subtitle' />
+      </View>
     </View>
   }
 
@@ -44,6 +46,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: commonStyles.space,
     backgroundColor: colors.white
+  },
+  wrapper: {
+    flex: 1,
+    justifyContent: 'center'
   },
   logo: {
     justifyContent: 'center',

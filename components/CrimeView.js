@@ -32,7 +32,9 @@ export default class CrimeView extends PureComponent<Props, State> {
   }
 
   /* eslint-disable react/jsx-no-bind */
-  renderCrimeItem = ({item}: Object): React$Element<View> => <CrimeListItem onPress={() => this.onPressCrime(item)} crime={item} />
+  renderCrimeItem = ({item}: Object): React$Element<View> => {
+    return <CrimeListItem onPress={() => this.onPressCrime(item)} crime={item} />
+  }
 
   renderEmptyState = (): React$Element<View> => {
     let {isCrimes} = this.props
@@ -40,9 +42,9 @@ export default class CrimeView extends PureComponent<Props, State> {
     return <View />
   }
 
-  onPressCrime = (item: Crime) => {
+  onPressCrime = (crime: Crime) => {
     let {onPressCrime} = this.props
-    if (onPressCrime) onPressCrime(item)
+    if (onPressCrime) onPressCrime(crime)
   }
 }
 

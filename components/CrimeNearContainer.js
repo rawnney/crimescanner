@@ -8,6 +8,8 @@ import LoadingView from './LoadingView'
 import CrimeView from './CrimeView'
 import * as PermissionsHelper from '../libs/PermissionHelper'
 import PermissionView from './PermissionView'
+import SelectedCrimeContainer from './SelectedCrimeContainer'
+import {goTo} from '../libs/AppNavigation'
 
 type Props = {}
 
@@ -83,9 +85,7 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
       })
   }
 
-  onPressCrime = (crime: Crime) => {
-    // console.warn(crime)
-  }
+  onPressCrime = (crime: Crime) => goTo(SelectedCrimeContainer, {crime})
 
   openPermissions = () => PermissionsHelper.openPermissionSettings()
 }

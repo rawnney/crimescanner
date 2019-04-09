@@ -8,6 +8,7 @@ import GeneralErrorContainer from '../components/GeneralErrorContainer'
 import StartContainer from '../components/StartContainer'
 import SignUpContainer from '../components/SignUpContainer'
 import LoginContainer from '../components/LoginContainer'
+import SelectedCrimeContainer from '../components/SelectedCrimeContainer'
 
 export default (): Object => ({
   [StartContainer.routeName]: StartContainer,
@@ -18,5 +19,6 @@ export default (): Object => ({
   [CrimeSearchContainer.routeName]: CrimeSearchContainer,
   [CrimeForumContainer.routeName]: CrimeForumContainer,
   [GeneralErrorContainer.routeName]: GeneralErrorContainer,
-  [TestContainer.routeName]: TestContainer
+  [TestContainer.routeName]: TestContainer,
+  [SelectedCrimeContainer.routeName]: SelectedCrimeContainer
 })

@@ -1,11 +1,12 @@
 // @flow
 import {Linking} from 'react-native'
-import {isEmulator, logger} from './Common'
+import {isEmulator} from './Common'
+import Logger from './Logger'
 
 export let openURL = (url: string): * => {
   return Linking.canOpenURL(url).then((supported: boolean) => {
     if (!supported) {
-      if (isEmulator()) logger('Can\'t open this link in emulator')
+      if (isEmulator()) Logger.warn('Can\'t open this link in emulator')
       return Promise.reject(new Error('Can\'t handle url: ' + url)).catch(() => {})
     } else
       return Linking.openURL(url)

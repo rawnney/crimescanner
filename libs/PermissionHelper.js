@@ -1,9 +1,8 @@
 // @flow
 import Permissions from 'react-native-permissions'
-import {logger} from './Common'
+import Logger from './Logger'
 import {openURL} from './WebViewHelper'
-
-const LOCAITON = 'location'
+import {LOCAITON} from './Consts'
 
 export let checkForLocationPermission = () => checkForPermissions(LOCAITON)
 
@@ -11,14 +10,14 @@ let checkForPermissions = (type: string): Promise<boolean> => {
   return Permissions.request(type).then(response => {
     switch (response) {
       case 'denied':
-        logger(`${'Permissions for ' + type + ' is denied'}`)
+        Logger.warn(`${'Permissions for ' + type + ' is denied'}`)
         return Promise.resolve(false)
       default:
-        logger(`${'Permissions for ' + type + ' is authorized'}`)
+        Logger.warn(`${'Permissions for ' + type + ' is authorized'}`)
         return Promise.resolve(true)
     }
   }).catch(error => {
-    logger(error)
+    Logger.warn(error)
     return Promise.resolve(false)
   })
 }

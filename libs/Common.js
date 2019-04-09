@@ -1,12 +1,7 @@
 // @flow
 import DeviceInfo from 'react-native-device-info'
 import {Platform, Vibration} from 'react-native'
-import Config, {isNotProd} from './Config'
-
-export let logger = (message: *): * => {
-  // eslint-disable-next-line
-  if (isNotProd()) console.warn(message) // isEmulator()
-}
+import Config from './Config'
 
 export function isIOS (): boolean {
   return Platform.OS === 'ios'

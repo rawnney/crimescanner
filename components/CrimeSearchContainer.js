@@ -7,6 +7,8 @@ import SearchBar from './SearchBar'
 import CrimeView from './CrimeView'
 import commonStyles from '../libs/CommonStyles'
 import {findDistrict, findCrimeType, getCrimesWithParams, getCrimeParams} from '../libs/CrimeHelper'
+import SelectedCrimeContainer from './SelectedCrimeContainer'
+import {goTo} from '../libs/AppNavigation'
 
 type Props = {}
 
@@ -60,7 +62,7 @@ export default class CrimeSearchContainer extends PureComponent<Props, State> {
     this.getCrimesWithParams(text)
   }
 
-  onPressCrime = (item: Crime) => {}
+  onPressCrime = (crime: Crime) => goTo(SelectedCrimeContainer, {crime})
 }
 
 const styles = StyleSheet.create({
