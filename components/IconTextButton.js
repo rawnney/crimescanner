@@ -15,13 +15,14 @@ type Props = {
   textStyle?: StyleSheet,
   text?: string,
   langKey?: string,
-  color?: string
+  color?: string,
+  horisontal?: boolean
 }
 
 export default class IconTextButton extends Component<Props> {
   render (): React$Element<View> {
-    let {onPress, iconStyle, style, name, text, langKey, color, textStyle} = this.props
-    return <ButtonWrapper onPress={onPress} style={[styles.container, style]}>
+    let {onPress, iconStyle, style, name, text, langKey, color, textStyle, horisontal} = this.props
+    return <ButtonWrapper onPress={onPress} style={[styles.container, horisontal ? styles.horisontal : undefined, style]}>
       <TextView text={text} langKey={langKey} style={[styles.text, {color: color}, textStyle]} />
       <Icon name={name} iconStyle={iconStyle} color={color} />
     </ButtonWrapper>
@@ -32,6 +33,9 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     padding: commonStyles.space
+  },
+  horisontal: {
+    flexDirection: 'row'
   },
   text: {
     ...Fonts.regular,

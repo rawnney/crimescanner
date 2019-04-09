@@ -1,11 +1,9 @@
 // @flow
 import {NO_COORDS, STOCKHOLM_DISTRICT} from '../consts/Coordinates'
 import {isEmulator} from './Common'
-import {isNotProd} from './Config'
+import Logger from './Logger'
 
 const COORD_LENGTH = 5
-
-let logger = isNotProd() && isEmulator()
 
 let formatPosition = (pos: Object): Object => {
   let {coords} = pos
@@ -22,8 +20,7 @@ export let getPosition = (): Promise<Object> => {
       if (pos) position = formatPosition(pos)
       if (isEmulator()) return resolve(fakePosition())
       if (position === undefined) reject(new Error(NO_COORDS))
-      // eslint-disable-next-line
-      if (logger) console.warn(position)
+      Logger.warn(position)
       return resolve(position)
     })
   })
@@ -31,7 +28,6 @@ export let getPosition = (): Promise<Object> => {
 
 let fakePosition = () => {
   let position = formatPosition(STOCKHOLM_DISTRICT)
-  // eslint-disable-next-line
-  if (logger) console.warn(position)
+  Logger.warn(position)
   return position
 }

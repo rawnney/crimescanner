@@ -2,11 +2,15 @@
 import React, {Component} from 'react'
 import {ScrollView, View, StyleSheet} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
+import {openURL} from '../libs/WebViewHelper'
+import {INFO_CIRCLE} from '../consts/Icons'
 import commonStyles from '../libs/CommonStyles'
 import Icon from './Icon'
 import TextView from './TextView'
 import LineBreak from './LineBreak'
 import Fonts from '../libs/Fonts'
+import IconTextButton from './IconTextButton'
+import colors from '../libs/Colors'
 
 type State = {}
 
@@ -34,11 +38,18 @@ export default class SelectedCrimeContainer extends Component<Props, State> {
           <TextView text={name} style={styles.location} />
           <TextView text={displayTime} style={styles.date} />
           <TextView text={summary} style={styles.summary} />
+          <IconTextButton name={INFO_CIRCLE} text='Läs mer på polisens hemsida' horisontal onPress={this.onPressUrl} style={styles.link} color={colors.gray} />
           {/* <TextView text={content} /> */}
         </View>
         <LineBreak />
       </ScrollView>
     </View>
+  }
+
+  onPressUrl = () => {
+    let {crime} = this.props
+    let {url} = crime
+    if (url) openURL(url)
   }
 }
 
@@ -77,5 +88,8 @@ export let styles = StyleSheet.create({
     ...Fonts.light,
     fontSize: 16,
     marginBottom: commonStyles.smallSpace
+  },
+  link: {
+    paddingLeft: 0
   }
 })
