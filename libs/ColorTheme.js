@@ -7,15 +7,15 @@ export let lightMode: ColorTheme = {
   backgroundColor: colors.white,
   color: colors.black,
   disabled: colors.gray,
-  headerBarTint: STATUS_BAR_LIGHT,
+  headerBarTint: STATUS_BAR_DARK,
   keyboardAppearance: KEYBOARD_COLOR_LIGHT
 }
 
 export let darkMode: ColorTheme = {
   isDarkMode: true,
   backgroundColor: colors.black,
-  color: colors.black,
+  color: colors.white,
   disabled: colors.gray,
-  headerBarTint: STATUS_BAR_DARK,
+  headerBarTint: STATUS_BAR_LIGHT,
   keyboardAppearance: KEYBOARD_COLOR_DARK
 }
