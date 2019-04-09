@@ -4,7 +4,9 @@ import {View, StyleSheet} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
 import colors from '../libs/Colors'
 
-type Props = {}
+type Props = {
+  user: User
+}
 
 type State = {}
 

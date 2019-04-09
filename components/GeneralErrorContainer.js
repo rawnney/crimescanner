@@ -6,6 +6,7 @@ import TextView from './TextView'
 import colors from '../libs/Colors'
 
 type Props = {
+  user: User,
   err?: *
 }
 

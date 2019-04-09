@@ -11,7 +11,9 @@ import PermissionView from './PermissionView'
 import SelectedCrimeContainer from './SelectedCrimeContainer'
 import {goTo} from '../libs/AppNavigation'
 
-type Props = {}
+type Props = {
+  user: User
+}
 
 type State = {
   position: Object,

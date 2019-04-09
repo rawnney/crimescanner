@@ -14,7 +14,9 @@ import {LOCATION_ARROW, SEARCH, COMMENT, CHART_BAR, BARCODE, COG} from '../const
 import commonStyles from '../libs/CommonStyles'
 import Icon from './Icon'
 
-type Props = {}
+type Props = {
+  user: User
+}
 type State = {}
 
 export default class HomeContainer extends PureComponent<Props, State> {
@@ -38,11 +40,26 @@ export default class HomeContainer extends PureComponent<Props, State> {
     </View>
   }
 
-  goToCrimeNearContainer = () => goTo(CrimeNearContainer)
-  goToCrimeSearchContainer = () => goTo(CrimeSearchContainer)
-  goToCrimeForumContainer = () => goTo(CrimeForumContainer)
-  goToCrimeStatistics = () => goTo(CrimeStatisticsContainer)
-  goToSettings = () => goTo(UserSettingsContainer)
+  goToCrimeNearContainer = () => {
+    let {user} = this.props
+    goTo(CrimeNearContainer, {user})
+  }
+  goToCrimeSearchContainer = () => {
+    let {user} = this.props
+    goTo(CrimeSearchContainer, {user})
+  }
+  goToCrimeForumContainer = () => {
+    let {user} = this.props
+    goTo(CrimeForumContainer, {user})
+  }
+  goToCrimeStatistics = () => {
+    let {user} = this.props
+    goTo(CrimeStatisticsContainer, {user})
+  }
+  goToSettings = () => {
+    let {user} = this.props
+    goTo(UserSettingsContainer, {user})
+  }
 }
 
 const styles = StyleSheet.create({

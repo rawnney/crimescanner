@@ -10,7 +10,9 @@ import {findDistrict, findCrimeType, getCrimesWithParams, getCrimeParams} from '
 import SelectedCrimeContainer from './SelectedCrimeContainer'
 import {goTo} from '../libs/AppNavigation'
 
-type Props = {}
+type Props = {
+  user: User
+}
 
 type State = {
   crimes: Array<Crime>,
@@ -62,7 +64,10 @@ export default class CrimeSearchContainer extends PureComponent<Props, State> {
     this.getCrimesWithParams(text)
   }
 
-  onPressCrime = (crime: Crime) => goTo(SelectedCrimeContainer, {crime})
+  onPressCrime = (crime: Crime) => {
+    let {user} = this.props
+    goTo(SelectedCrimeContainer, {crime, user})
+  }
 }
 
 const styles = StyleSheet.create({

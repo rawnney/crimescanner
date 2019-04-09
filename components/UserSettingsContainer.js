@@ -10,7 +10,9 @@ import * as Actions from '../libs/Actions'
 import getColorTheme from '../libs/getColorTheme'
 import {connect} from 'react-redux'
 
-type Props = {}
+type Props = {
+  user: User
+}
 type State = {}
 
 class UserSettingsContainer extends PureComponent<Props, State> {

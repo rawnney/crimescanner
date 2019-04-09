@@ -11,7 +11,7 @@ import commonStyles from '../libs/CommonStyles'
 
 type Props = {}
 type State = {
-  user: *,
+  user: ?User,
 }
 
 export default class StartContainer extends PureComponent<Props, State> {
@@ -25,9 +25,8 @@ export default class StartContainer extends PureComponent<Props, State> {
 
   componentDidMount () {
     delay(500).then(() => firebase.auth().onAuthStateChanged(user => {
-      // console.warn(user)
       switch (true) {
-        case !!user: return goTo(HomeContainer)
+        case !!user: return goTo(HomeContainer, {user})
         default: return goTo(SignUpContainer)
       }
     }))
