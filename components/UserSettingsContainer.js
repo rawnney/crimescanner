@@ -9,6 +9,9 @@ import Store from '../libs/Store'
 import * as Actions from '../libs/Actions'
 import getColorTheme from '../libs/getColorTheme'
 import {connect} from 'react-redux'
+import * as AuthActions from '../libs/AuthActions'
+import IconTextButton from './IconTextButton'
+import {SIGNOUT, DELETE} from '../consts/Icons'
 
 type Props = {
   user: User
@@ -26,11 +29,17 @@ class UserSettingsContainer extends PureComponent<Props, State> {
     return <View style={styles.container}>
       <View style={styles.wrapper}>
         <RowSwitch text='Dark mode' value={isDarkMode} onValueChange={this.toggle} />
+        <IconTextButton text='Signout' name={SIGNOUT} onPress={this.logoutUser} />
+        <IconTextButton text='Delete user' name={DELETE} onPress={this.deleteUser} />
       </View>
     </View>
   }
 
   toggle = (isDarkMode: boolean) => Store.dispatch(Actions.changeAppState({isDarkMode: isDarkMode}))
+
+  logoutUser = () => AuthActions.signOutUser()
+
+  deleteUser = () => {} // AuthActions.deleteUser()
 }
 
 export default connect(state => state)(UserSettingsContainer)

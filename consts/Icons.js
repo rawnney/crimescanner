@@ -18,5 +18,8 @@ module.exports = {
   USER: Icons.user,
   LOCK: Icons.lock,
   BOOK: Icons.book,
-  PLUS: Icons.plus
+  PLUS: Icons.plus,
+  SIGNOUT: Icons.signOutAlt,
+  DELETE: Icons.trash
+
 }
