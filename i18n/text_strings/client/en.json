@@ -10,5 +10,7 @@
   "crime_statistics_subtitle": "Check out the crime-rates and more",
   "general_loading": "Loading...",
   "no_crime_found_text": "No crime found",
-  "no_crime_found_emoji": "🤗"
+  "no_crime_found_emoji": "🤗",
+  "crime_settings_title": "Settings",
+  "crime_settings_subtitle": "Make you settings"
 }

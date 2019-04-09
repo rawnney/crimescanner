@@ -10,5 +10,7 @@
   "crime_statistics_subtitle": "Se över brottstatistiken",
   "general_loading": "Laddar...",
   "no_crime_found_text": "Finns inga brott här",
-  "no_crime_found_emoji": "🤗"
+  "no_crime_found_emoji": "🤗",
+  "crime_settings_title": "Inställningar",
+  "crime_settings_subtitle": "Ändra dina inställningar"
 }

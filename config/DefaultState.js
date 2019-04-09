@@ -1,6 +1,8 @@
 // @flow
 let defaultState = {
-  appState: {}
+  appState: {
+    isDarkMode: false
+  }
 }
 
 export default defaultState

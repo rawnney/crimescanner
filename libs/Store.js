@@ -10,7 +10,7 @@ const middleware = Redux.applyMiddleware(thunk, promise)
 let STORE = Redux.createStore(Reducer, DefaultState)
 
 export let createStore = (state: Object = DefaultState) => {
-  STORE = Redux.createStore(Reducer, state, Redux.compose(middleware))
+  STORE = Redux.createStore(Reducer, state, middleware)
   return STORE
 }
 

@@ -9,6 +9,7 @@ import StartContainer from '../components/StartContainer'
 import SignUpContainer from '../components/SignUpContainer'
 import LoginContainer from '../components/LoginContainer'
 import SelectedCrimeContainer from '../components/SelectedCrimeContainer'
+import UserSettingsContainer from '../components/UserSettingsContainer'
 
 export default (): Object => ({
   [StartContainer.routeName]: StartContainer,
@@ -20,5 +21,6 @@ export default (): Object => ({
   [CrimeForumContainer.routeName]: CrimeForumContainer,
   [GeneralErrorContainer.routeName]: GeneralErrorContainer,
   [TestContainer.routeName]: TestContainer,
+  [UserSettingsContainer.routeName]: UserSettingsContainer,
   [SelectedCrimeContainer.routeName]: SelectedCrimeContainer
 })
