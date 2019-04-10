@@ -20,6 +20,6 @@ module.exports = {
   BOOK: Icons.book,
   PLUS: Icons.plus,
   SIGNOUT: Icons.signOutAlt,
-  DELETE: Icons.trash
-
+  DELETE: Icons.trash,
+  ARROW_CIRCLE_RIGHT: Icons.arrowAltCircleRight
 }

@@ -1,5 +1,6 @@
 // @flow
 import firebase from 'react-native-firebase'
+import Logger from '../libs/Logger'
 
 export let signInWithEmailAndPassword = (credentials: Object): Promise<User> => {
   let {password, email} = credentials
@@ -28,8 +29,14 @@ export let signOutUser = () => {
     .catch((error) => Promise.reject(error))
 }
 
-// export let deleteUser = () => {
-//   return firebase.auth().delete()
-//     .then(() => Promise.resolve())
-//     .catch((error) => Promise.reject(error))
-// }
+export let deleteUser = (password: string, onSuccess: Function, onError: Function) => {
+  var user = firebase.auth().currentUser
+  var credentials = firebase.auth.EmailAuthProvider.credential(user.email, password)
+  user.reauthenticateWithCredential(credentials)
+    .then(() => user.delete())
+    .then(() => onSuccess())
+    .catch((error) => {
+      Logger.warn(error)
+      onError()
+    })
+}

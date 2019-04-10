@@ -5,22 +5,22 @@ import ButtonWrapper from './ButtonWrapper'
 import TextView from './TextView'
 import commonStyles from '../libs/CommonStyles'
 import colors from '../libs/Colors'
-import Fonts from '../libs/Fonts';
+import Fonts from '../libs/Fonts'
 
 type Props = {
   onPress?: Function,
-  disable?: boolean,
   text?: string,
   langKey?: string,
   style?: StyleSheet,
   textColor?: string,
   backgroundColor?: string,
+  disabled?: boolean
 }
 
 export default class Button extends Component <Props> {
   render (): React$Element<View> {
-    let {onPress, disable, text, langKey, style, backgroundColor, textColor} = this.props
-    return <ButtonWrapper onPress={onPress} style={[styles.buttonStyle, {backgroundColor: backgroundColor || colors.black}, style]} disable={disable} >
+    let {onPress, disabled, text, langKey, style, backgroundColor, textColor} = this.props
+    return <ButtonWrapper onPress={onPress} style={[styles.buttonStyle, {backgroundColor: backgroundColor || colors.black}, disabled ? {backgroundColor: colors.gray} : {}, style]} disable={disabled} >
       <TextView text={text} langKey={langKey} style={[styles.text, {color: textColor || colors.white}]} />
     </ButtonWrapper>
   }

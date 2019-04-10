@@ -37,7 +37,7 @@ export default class EnterCredentialsView extends PureComponent<Props, State> {
       <TextInput text={email} autoCapitalize='none' onChangeText={this.onChangeEmail} placeholder='Email' style={styles.textInput} />
       <TextInput text={password} autoCapitalize='none' secureTextEntry onChangeText={this.onChangePassword} placeholder='Password' style={styles.textInput} />
       <IconTextButton text={isSignUp ? 'Already have an account?' : 'Create an account'} name={LOCK} onPress={this.switchComp} />
-      <Button text={isSignUp ? 'SIGNUP' : 'LOGIN'} onPress={this.onPressContinue} />
+      <Button text={isSignUp ? 'SIGNUP' : 'LOGIN'} onPress={this.onPressContinue} disabled={email === '' || password === ''} />
     </View>
   }
 

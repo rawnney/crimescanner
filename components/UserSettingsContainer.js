@@ -12,6 +12,8 @@ import {connect} from 'react-redux'
 import * as AuthActions from '../libs/AuthActions'
 import IconTextButton from './IconTextButton'
 import {SIGNOUT, DELETE} from '../consts/Icons'
+import {goTo} from '../libs/AppNavigation'
+import DeleteAccountContainer from './DeleteAccountContainer'
 
 type Props = {
   user: User
@@ -30,7 +32,7 @@ class UserSettingsContainer extends PureComponent<Props, State> {
       <View style={styles.wrapper}>
         <RowSwitch text='Dark mode' value={isDarkMode} onValueChange={this.toggle} />
         <IconTextButton text='Signout' name={SIGNOUT} onPress={this.logoutUser} />
-        <IconTextButton text='Delete user' name={DELETE} onPress={this.deleteUser} />
+        <IconTextButton text='Delete account' name={DELETE} onPress={this.goToDeleteAccountContainer} />
       </View>
     </View>
   }
@@ -39,7 +41,7 @@ class UserSettingsContainer extends PureComponent<Props, State> {
 
   logoutUser = () => AuthActions.signOutUser()
 
-  deleteUser = () => {} // AuthActions.deleteUser()
+  goToDeleteAccountContainer = () => goTo(DeleteAccountContainer)
 }
 
 export default connect(state => state)(UserSettingsContainer)
