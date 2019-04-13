@@ -65,7 +65,7 @@ export let styles = StyleSheet.create({
   },
   iconTypeWrapper: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     marginBottom: commonStyles.space
   },
   icon: {
