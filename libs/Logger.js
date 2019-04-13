@@ -2,8 +2,8 @@
 /* eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
 import {isNotProd} from './Config'
 
-let warn = (message: *): * => {
-  if (isNotProd()) console.warn(message)
+let warn = (...args: *) => {
+  if (isNotProd()) console.warn(...args)
 }
 
 export default {warn}

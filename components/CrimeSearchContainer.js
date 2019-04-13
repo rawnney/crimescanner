@@ -6,7 +6,7 @@ import colors from '../libs/Colors'
 import SearchBar from './SearchBar'
 import CrimeView from './CrimeView'
 import commonStyles from '../libs/CommonStyles'
-import {findDistrict, findCrimeType, getCrimesWithParams, getCrimeParams} from '../libs/CrimeHelper'
+import {findDistrict, findCrimeType, getCrimes, getCrimeParams} from '../libs/CrimeHelper'
 import SelectedCrimeContainer from './SelectedCrimeContainer'
 import {goTo} from '../libs/AppNavigation'
 
@@ -42,12 +42,12 @@ export default class CrimeSearchContainer extends PureComponent<Props, State> {
   }
 
   getCrimesWithParams = (text: string): * => {
-    let request
-    if (findDistrict(text)) request = {location: text}
-    if (findCrimeType(text)) request = {type: getCrimeParams(text)}
-    if (request) {
+    let param
+    if (findDistrict(text)) param = {location: text}
+    if (findCrimeType(text)) param = {type: getCrimeParams(text)}
+    if (param) {
       this.setState({isLoading: true, crimes: [], isCrimes: true})
-      getCrimesWithParams(request)
+      getCrimes(param)
         .then(crimes => {
           this.setState({crimes: crimes})
           if (!!crimes && crimes.length !== 0) return this.setState({crimes: crimes})

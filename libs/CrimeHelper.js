@@ -16,7 +16,7 @@ export let getCrimesNearLocation = (position: Object): Promise<Array<Object>> =>
     })
 }
 
-export let getCrimesWithParams = (params: Object): Promise<Object> => {
+export let getCrimes = (params?: CrimeRequest): Promise<Array<Crime>> => {
   return fetchCrimes(params).then(res => mapCrime(res))
 }
 

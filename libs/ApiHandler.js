@@ -1,35 +1,28 @@
 // @flow
 import {formatTime} from './moment'
-import {isNotProd} from './Config'
-import {isEmulator} from './Common'
+import Logger from './Logger'
 
 const baseUri = 'https://polisen.se/api/events?'
 const __LOCATION__ = 'locationname='
 const __TYPE__ = 'type='
 const __DATETIME__ = 'DateTime='
 
-let logger = isNotProd() && isEmulator()
-
 export let fetchCrimes = (params?: Object): Promise<Object> => {
   return new Promise((resolve, reject) => {
     let uri = baseUri + setParams(params)
-    // eslint-disable-next-line
-    if (logger) console.warn(uri)
+    Logger.warn(uri)
     fetch(uri)
       .then((response, error) => {
         if (error) return reject(error)
-        // eslint-disable-next-line
-        if (isNotProd() && logger) console.warn('Response', response)
+        Logger.warn('Response', response)
         return response.json()
       })
       .then(json => {
-        // eslint-disable-next-line
-        if (isNotProd() && logger) console.warn('JSON', json)
+        Logger.warn('JSON', json)
         return resolve(json)
       })
       .catch((err) => {
-        // eslint-disable-next-line
-        if (isNotProd() && logger) console.warn(err)
+        Logger.warn(err)
         return reject(err)
       })
   })
