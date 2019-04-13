@@ -1,9 +1,8 @@
 // @flow
 import firebase from 'react-native-firebase'
 import Logger from '../libs/Logger'
-// import {getCrimes} from './CrimeHelper'
 
-const db = firebase.firestore().collection('crimes')
+const db = (datetime: string) => firebase.firestore().collection(datetime)
 
 export let getMurder = () => {
   db.where('type', '==', 'mord')
@@ -16,34 +15,27 @@ export let getMurder = () => {
     })
 }
 
-export let getAllCrimes = (crimes: Array<Crime>) => {
-  let crimeNotInDb = []
-  db.get().then((querySnapshot) => {
-    Logger.warn(querySnapshot)
-    querySnapshot.forEach(doc => {
-      crimes.find(crime => {
-        if (crime.id !== doc.id) {
-          Logger.warn(crime)
-          crimeNotInDb.push(crime) // writeCrime(crime)
-        }
-      })
-    }).then((doc) => Logger.warn(crimeNotInDb, doc))
-  })
-}
-
 export let updateDB = (crimes: Array<Crime>) => {
-  let crimeNotInDb = []
-  db.get().then((querySnapshot) => {
-    querySnapshot.forEach(doc => {
-      crimes.find(crime => {
-        if (crime.id !== doc.id) crimeNotInDb.push(crime) // writeCrime(crime)
+  let dates = []
+  crimes.map(crime => {
+    if (!dates.includes(crime.datetime)) dates.push(crime.datetime)
+  })
+  dates.forEach(date => {
+    db(date).get()
+      .then(snapshot => snapshot.docs.map(doc => doc.data()))
+      .then(data => {
+        let crimesNotInDb = crimes.filter(crime => !data.find(dbCrime => crime.id === dbCrime.id)).filter(crime => crime.datetime === date)
+        if (crimesNotInDb.length === 0) return Logger.warn('Database is up to date.')
+        return crimesNotInDb.map(crime => addCrimeToCollection(crime))
       })
-    }).then(() => Logger.warn(crimeNotInDb))
+      .catch(err => Logger.warn('Error getting crimes', err))
   })
 }
 
-export let writeCrime = (crime: Crime) => {
-  db.add(crime)
-    .then(crime => Logger.warn('Success adding crime:', crime))
-    .catch(error => Logger.warn('Error adding crime:', error))
+export let addCrimeToCollection = (crime: Crime) => {
+  let {datetime} = crime
+  db(datetime)
+    .add(crime)
+    .then(() => Logger.warn('Added crime to', datetime))
+    .catch(err => Logger.warn(err))
 }

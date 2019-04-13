@@ -10,7 +10,6 @@ import * as PermissionsHelper from '../libs/PermissionHelper'
 import PermissionView from './PermissionView'
 import SelectedCrimeContainer from './SelectedCrimeContainer'
 import {goTo} from '../libs/AppNavigation'
-import * as FirestoreActions from '../libs/FirestoreActions'
 
 type Props = {
   user: User
@@ -74,10 +73,6 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
           .then(() => {
             let {position, crimes} = this.state
             if (position && crimes) this.setState({isLoading: false})
-          })
-          .then(() => {
-            // let {crimes} = this.state
-            // FirestoreActions.getAllCrimes(crimes)
           })
           .finally(() => this.setState({isLoading: false}))
       })
