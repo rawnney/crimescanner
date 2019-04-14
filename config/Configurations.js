@@ -3,7 +3,8 @@
 let baseFeatureConfig = {
   enableLanguageSupport: false,
   enableVibration: false,
-  enableLogger: false
+  enableLogger: false,
+  enableFirestore: false
 }
 
 let baseConfiguration = {}
@@ -11,6 +12,7 @@ let baseConfiguration = {}
 let Development = {
   ...baseConfiguration,
   enableLogger: true,
+  enableFirestore: true,
   name: 'Development',
   features: {
     ...baseFeatureConfig
