@@ -48,7 +48,7 @@ export const CRIME_TYPE: CrimeType = [
   {key: 'Sammanfattning helg', param: 'Sammanfattning helg', icon: '✔️'},
   {key: 'Sammanfattning kväll', param: 'Sammanfattning kväll', icon: '✔️'},
   {key: 'Sammanfattning kväll och natt', param: 'Sammanfattning kväll och natt', icon: '✔️'},
-  {key: 'Sammanfattning natt', param: 'Sammanfattning natt', icon: '👮✔️'},
+  {key: 'Sammanfattning natt', param: 'Sammanfattning natt', icon: '✔️'},
   {key: 'Sammanfattning vecka', param: 'Sammanfattning vecka', icon: '✔️'},
   {key: 'Sedlighetsbrott', param: 'Sedlighetsbrott', icon: '🍆'},
   {key: 'Sjukdom/olycksfall', param: 'Sjukdom/olycksfall', icon: '⛑️'},
