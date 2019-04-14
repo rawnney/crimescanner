@@ -2,7 +2,7 @@
 import {fetchCrimes} from '../libs/ApiHandler'
 import {mapCrime} from '../libs/Mapper'
 import {SV_DISTRICTS} from '../consts/Coordinates'
-import * as Moment from './moment'
+import {isToday, isYesterday, isOtherDays, today} from './moment'
 import {CRIME_TYPE} from '../consts/CrimeType'
 
 export let getCrimesNearLocation = (position: Object): Promise<Array<Object>> => {
@@ -18,6 +18,11 @@ export let getCrimesNearLocation = (position: Object): Promise<Array<Object>> =>
 
 export let getCrimes = (params?: CrimeRequest): Promise<Array<Crime>> => {
   return fetchCrimes(params).then(res => mapCrime(res))
+}
+
+export let getTodaysCrimes = (): Promise<Array<Crime>> => {
+  let date = {date: today()}
+  return getCrimes(date)
 }
 
 export let getCrimeIcon = (type: string): string => {
@@ -43,7 +48,7 @@ export function findDistrict (input: string): string {
 export let mapTodaysCrimes = (crimes: Array<Crime>) => {
   let crimesToday = []
   crimes.map(crime => {
-    if (Moment.isToday(crime.datetime)) crimesToday.push(crime)
+    if (isToday(crime.datetime)) crimesToday.push(crime)
   })
   return crimesToday
 }
@@ -51,7 +56,7 @@ export let mapTodaysCrimes = (crimes: Array<Crime>) => {
 export let mapYesterdaysCrimes = (crimes: Array<Crime>) => {
   let crimesYesterday = []
   crimes.map(crime => {
-    if (Moment.isYesterday(crime.datetime)) crimesYesterday.push(crime)
+    if (isYesterday(crime.datetime)) crimesYesterday.push(crime)
   })
   return crimesYesterday
 }
@@ -59,7 +64,7 @@ export let mapYesterdaysCrimes = (crimes: Array<Crime>) => {
 export let mapOtherDaysCrimes = (crimes: Array<Crime>) => {
   let crimesOtherDays = []
   crimes.map(crime => {
-    if (Moment.isOtherDays(crime.datetime)) crimesOtherDays.push(crime)
+    if (isOtherDays(crime.datetime)) crimesOtherDays.push(crime)
   })
   return crimesOtherDays
 }

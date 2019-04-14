@@ -1,5 +1,4 @@
 // @flow
-import {formatTime} from './moment'
 import Logger from './Logger'
 
 const baseUri = 'https://polisen.se/api/events?'
@@ -33,6 +32,6 @@ let setParams = (params?: CrimeRequest): string => {
   let {location, type, date} = params
   if (location) return (__LOCATION__ + location).replace(/ /g, '%20')
   if (type) return (__TYPE__ + type).replace(/ /g, '%20')
-  if (date) return __DATETIME__ + formatTime(date)
+  if (date) return __DATETIME__ + date
   return ''
 }

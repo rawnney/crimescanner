@@ -8,8 +8,8 @@ import firebase from 'react-native-firebase'
 import HomeContainer from './HomeContainer'
 import SignUpContainer from './SignUpContainer'
 import commonStyles from '../libs/CommonStyles'
-// import {getCrimes} from '../libs/CrimeHelper'
-// import * as FirestoreActions from '../libs/FirestoreActions'
+import {getCrimes} from '../libs/CrimeHelper'
+import * as FirestoreActions from '../libs/FirestoreActions'
 
 type Props = {}
 type State = {
@@ -32,9 +32,7 @@ export default class StartContainer extends PureComponent<Props, State> {
         default: return goTo(SignUpContainer)
       }
     }))
-    // .then(() => {
-    //   getCrimes().then(crimes => FirestoreActions.updateDB(crimes))
-    // })
+      .then(() => getCrimes().then(crimes => FirestoreActions.updateDB(crimes)))
   }
 
   render (): React$Element<View> {

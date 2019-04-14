@@ -16,8 +16,8 @@ export let getMurder = () => {
     })
 }
 
-export let updateDB = (crimes: Array<Crime>) => {
-  let dates = [].sort((a, b) => moment(b) - moment(a))
+export let bigUpdateDB = (crimes: Array<Crime>) => {
+  let dates = []
   crimes.map(crime => {
     if (!dates.includes(crime.datetime)) dates.push(crime.datetime)
   })
@@ -34,9 +34,28 @@ export let updateDB = (crimes: Array<Crime>) => {
   })
 }
 
-// db(sortedDates[0]).orderBy('id', 'desc').limit(3).get()
-//   .then(data => Logger.warn(data))
-//   .catch(err => Logger.warn(err))
+export let updateDB = (crimes: Array<Crime>) => {
+  const shallowUpdateLength = 5
+  let dates = []
+  crimes.map(crime => {
+    if (!dates.includes(crime.datetime)) dates.push(crime.datetime)
+  })
+  let sortedDates = dates.sort((a, b) => moment(b) - moment(a))
+  let sortedCrimes = crimes.sort((a, b) => (b.id - a.id)).slice(0, shallowUpdateLength)
+
+  db(sortedDates[0]).orderBy('id', 'desc').limit(shallowUpdateLength).get()
+    .then(snapshot => snapshot.docs.map(doc => doc.data()))
+    .then(data => {
+      let missingCrimes = sortedCrimes.filter(crime => !data.find(dbCrime => crime.id === dbCrime.id))
+      if (missingCrimes.length === 0) return Logger.warn('Shallow update - Everything is up to date.')
+      if (missingCrimes.length === sortedCrimes.length) {
+        Logger.warn('Shallow update - Missing', missingCrimes.length, '- Runnign updateDB.')
+        return bigUpdateDB(crimes)
+      }
+      missingCrimes.forEach(crime => addCrimeToCollection(crime))
+      return Logger.warn('Missing', missingCrimes.length, 'crimes', missingCrimes)
+    })
+}
 
 export let addCrimeToCollection = (crime: Crime) => {
   let {datetime, id} = crime
