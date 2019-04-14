@@ -18,7 +18,7 @@ export let fetchCrimes = (params?: Object): Promise<Object> => {
         return response.json()
       })
       .then(json => {
-        Logger.warn('JSON', json)
+        // Logger.warn('JSON', json)
         return resolve(json)
       })
       .catch((err) => {

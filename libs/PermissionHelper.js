@@ -13,7 +13,7 @@ let checkForPermissions = (type: string): Promise<boolean> => {
         Logger.warn(`${'Permissions for ' + type + ' is denied'}`)
         return Promise.resolve(false)
       default:
-        Logger.warn(`${'Permissions for ' + type + ' is authorized'}`)
+        // Logger.warn(`${'Permissions for ' + type + ' is authorized'}`)
         return Promise.resolve(true)
     }
   }).catch(error => {
