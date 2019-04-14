@@ -6,6 +6,8 @@ import colors from '../libs/Colors'
 import {getCrimes} from '../libs/CrimeHelper'
 import TextView from './TextView'
 import LoadingView from './LoadingView'
+import commonStyles from '../libs/CommonStyles'
+import LineBreak from './LineBreak'
 
 type Props = {
   user: User
@@ -50,8 +52,12 @@ export default class CrimeStatisticsContainer extends PureComponent<Props, State
 
   renderCrimeTypeItem = (item: Array<Crime>, index: number) => {
     return <View key={index}>
-      <TextView text={item.length.toString()} />
-      <TextView text={item[0].type} />
+      <View style={styles.listItemwrapper}>
+        <TextView text={item.length.toString()} style={styles.number} />
+        <TextView text={item[0].icon} style={styles.icon} />
+        <TextView text={item[0].type} style={styles.type} />
+      </View>
+      <LineBreak />
     </View>
   }
 
@@ -75,5 +81,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white
+  },
+  listItemwrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: commonStyles.space,
+    alignItems: 'center'
+  },
+  number: {
+    fontSize: 16,
+    marginRight: commonStyles.smallSpace
+  },
+  icon: {
+    fontSize: 16,
+    padding: commonStyles.smallSpace
+  },
+  type: {
+    fontSize: 16
   }
 })
