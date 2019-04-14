@@ -11,6 +11,7 @@ import LoginContainer from '../components/LoginContainer'
 import SelectedCrimeContainer from '../components/SelectedCrimeContainer'
 import UserSettingsContainer from '../components/UserSettingsContainer'
 import DeleteAccountContainer from '../components/DeleteAccountContainer'
+import CrimeStatisticsContainer from '../components/CrimeStatisticsContainer'
 
 export default (): Object => ({
   [StartContainer.routeName]: StartContainer,
@@ -24,5 +25,6 @@ export default (): Object => ({
   [TestContainer.routeName]: TestContainer,
   [UserSettingsContainer.routeName]: UserSettingsContainer,
   [SelectedCrimeContainer.routeName]: SelectedCrimeContainer,
-  [DeleteAccountContainer.routeName]: DeleteAccountContainer
+  [DeleteAccountContainer.routeName]: DeleteAccountContainer,
+  [CrimeStatisticsContainer.routeName]: CrimeStatisticsContainer
 })
