@@ -11,11 +11,11 @@ let baseConfiguration = {}
 
 let Development = {
   ...baseConfiguration,
-  enableLogger: true,
-  enableFirestore: true,
   name: 'Development',
   features: {
-    ...baseFeatureConfig
+    ...baseFeatureConfig,
+    enableLogger: true,
+    enableFirestore: true
   }
 }
 

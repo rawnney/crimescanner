@@ -10,6 +10,7 @@ import SignUpContainer from './SignUpContainer'
 import commonStyles from '../libs/CommonStyles'
 import {getCrimes} from '../libs/CrimeHelper'
 import * as FirestoreActions from '../libs/FirestoreActions'
+import Store from '../libs/Store'
 
 type Props = {}
 type State = {
@@ -23,16 +24,17 @@ export default class StartContainer extends PureComponent<Props, State> {
     headerLeft: <View />,
     headerStyle: commonStyles.invisibleHeader
   })
-  state = {user: null}
+  state = {user: undefined}
 
   componentDidMount () {
+    let {config} = Store.getState()
     delay(500).then(() => firebase.auth().onAuthStateChanged(user => {
       switch (true) {
         case !!user: return goTo(HomeContainer, {user})
         default: return goTo(SignUpContainer)
       }
     }))
-      .then(() => getCrimes().then(crimes => FirestoreActions.updateDB(crimes)))
+      .then(() => config.enableFirestore ? getCrimes().then(crimes => FirestoreActions.updateDB(crimes)) : undefined)
   }
 
   render (): React$Element<View> {
