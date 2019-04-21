@@ -16,8 +16,8 @@ let Development = {
   features: {
     ...baseFeatureConfig,
     enableLogger: true,
-    enableFirestore: false,
-    enableSignUp: false
+    enableFirestore: true,
+    enableSignUp: true
   }
 }
 
@@ -25,7 +25,10 @@ let Production = {
   ...baseConfiguration,
   name: 'Production',
   features: {
-    ...baseFeatureConfig
+    ...baseFeatureConfig,
+    enableLogger: false,
+    enableFirestore: true,
+    enableSignUp: false
   }
 }
 

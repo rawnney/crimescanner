@@ -30,14 +30,14 @@ class UserSettingsContainer extends PureComponent<Props, State> {
     let isDarkMode = getColorTheme().isDarkMode
     return <View style={styles.container}>
       <View style={styles.wrapper}>
-        <RowSwitch text='Dark mode' value={isDarkMode} onValueChange={this.toggle} />
+        <RowSwitch text='Dark mode' value={isDarkMode} onValueChange={this.toggleDarkMode} />
         <IconTextButton text='Signout' name={SIGNOUT} onPress={this.logoutUser} />
         <IconTextButton text='Delete account' name={DELETE} onPress={this.goToDeleteAccountContainer} />
       </View>
     </View>
   }
 
-  toggle = (isDarkMode: boolean) => Store.dispatch(Actions.changeAppState({isDarkMode: isDarkMode}))
+  toggleDarkMode = (isDarkMode: boolean) => Store.dispatch(Actions.changeAppState({isDarkMode: isDarkMode}))
 
   logoutUser = () => AuthActions.signOutUser()
 

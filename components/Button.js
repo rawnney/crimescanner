@@ -21,7 +21,7 @@ type Props = {
 export default class Button extends Component <Props> {
   render (): React$Element<View> {
     let {onPress, disabled, text, langKey, style, backgroundColor, textColor} = this.props
-    return <ButtonWrapper onPress={onPress} style={[styles.buttonStyle, hasNotch ? styles.notch : undefined, {backgroundColor: backgroundColor || colors.deepSparkle}, disabled ? {backgroundColor: colors.gray} : {}, style]} disable={disabled} >
+    return <ButtonWrapper onPress={onPress} style={[styles.buttonStyle, hasNotch() ? styles.notch : undefined, {backgroundColor: backgroundColor || colors.deepSparkle}, disabled ? {backgroundColor: colors.gray} : {}, style]} disable={disabled} >
       <TextView text={text} langKey={langKey} style={[styles.text, {color: textColor || colors.white}]} />
     </ButtonWrapper>
   }

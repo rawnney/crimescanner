@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   logo: {
+    marginTop: commonStyles.space,
     justifyContent: 'center',
     alignSelf: 'center'
   }

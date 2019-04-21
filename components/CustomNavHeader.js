@@ -23,7 +23,7 @@ export default class CustomNavHeader extends Component<Props, State> {
     let {options} = scene.descriptor
     if (!options) return <View style={styles.container} />
     let {headerRight, headerLeft, headerStyle, headerBarTint} = options
-    return <View style={[styles.container, hasNotch ? styles.notch : undefined, headerStyle]}>
+    return <View style={[styles.container, hasNotch() ? styles.notch : undefined, headerStyle]}>
       <StatusBar barStyle={headerBarTint || STATUS_BAR_DARK} />
       <View style={styles.headerLeft}>
         {headerLeft || <BackButton />}
