@@ -3,6 +3,7 @@ import colors from '../libs/Colors'
 import {Component} from 'react'
 import {View, StyleSheet, StatusBar} from 'react-native'
 import {STATUS_BAR_DARK} from '../libs/Consts'
+import {hasNotch} from '../libs/Common'
 import BackButton from './BackButton'
 import commonStyles from '../libs/CommonStyles'
 
@@ -22,7 +23,7 @@ export default class CustomNavHeader extends Component<Props, State> {
     let {options} = scene.descriptor
     if (!options) return <View style={styles.container} />
     let {headerRight, headerLeft, headerStyle, headerBarTint} = options
-    return <View style={[styles.container, headerStyle]}>
+    return <View style={[styles.container, hasNotch ? styles.notch : undefined, headerStyle]}>
       <StatusBar barStyle={headerBarTint || STATUS_BAR_DARK} />
       <View style={styles.headerLeft}>
         {headerLeft || <BackButton />}
@@ -44,6 +45,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: commonStyles.navBarHeightAndStatusBarHeight,
     borderColor: colors.transparent
+  },
+  notch: {
+    marginTop: commonStyles.notchSpace
   },
   headerLeft: {
     top: 10,

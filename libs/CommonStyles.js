@@ -6,14 +6,16 @@ let space = 15
 let smallSpace = space / 2
 let buttonHeight = 55
 let navbarHeight = isIOS() ? 45 : 56
-var iosStatusBarHeight = isIOS ? 20 : 0
-var navBarHeightAndStatusBarHeight = navbarHeight + iosStatusBarHeight
+let iosStatusBarHeight = isIOS() ? 20 : 0
+let navBarHeightAndStatusBarHeight = navbarHeight + iosStatusBarHeight
+let notchSpace = space * 2
 export default {
   space,
   smallSpace,
   buttonHeight,
   navbarHeight,
   navBarHeightAndStatusBarHeight,
+  notchSpace,
   invisibleHeader: {
     width: '100%',
     backgroundColor: colors.transparent,

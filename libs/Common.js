@@ -18,6 +18,11 @@ export let isEmulator = (): boolean => {
   return false
 }
 
+export let hasNotch = (): boolean => {
+  if (DeviceInfo.hasNotch()) return true
+  return false
+}
+
 export function truncateString (string: string, length: number): string {
   if (string.length > length) return `${string.substring(0, length)}...`
   return string

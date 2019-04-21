@@ -1,6 +1,7 @@
 // @flow
 import {Component} from 'react'
 import {StyleSheet, View} from 'react-native'
+import {hasNotch} from '../libs/Common'
 import ButtonWrapper from './ButtonWrapper'
 import TextView from './TextView'
 import commonStyles from '../libs/CommonStyles'
@@ -20,7 +21,7 @@ type Props = {
 export default class Button extends Component <Props> {
   render (): React$Element<View> {
     let {onPress, disabled, text, langKey, style, backgroundColor, textColor} = this.props
-    return <ButtonWrapper onPress={onPress} style={[styles.buttonStyle, {backgroundColor: backgroundColor || colors.black}, disabled ? {backgroundColor: colors.gray} : {}, style]} disable={disabled} >
+    return <ButtonWrapper onPress={onPress} style={[styles.buttonStyle, hasNotch ? styles.notch : undefined, {backgroundColor: backgroundColor || colors.deepSparkle}, disabled ? {backgroundColor: colors.gray} : {}, style]} disable={disabled} >
       <TextView text={text} langKey={langKey} style={[styles.text, {color: textColor || colors.white}]} />
     </ButtonWrapper>
   }
@@ -36,6 +37,10 @@ export let styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     bottom: 0
+  },
+  notch: {
+    height: commonStyles.buttonHeight + commonStyles.notchSpace,
+    paddingBottom: commonStyles.notchSpace
   },
   text: {
     ...Fonts.bold,
