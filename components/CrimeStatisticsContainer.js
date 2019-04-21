@@ -8,6 +8,7 @@ import TextView from './TextView'
 import LoadingView from './LoadingView'
 import commonStyles from '../libs/CommonStyles'
 import LineBreak from './LineBreak'
+import {findOccurrence} from '../libs/Common'
 
 type Props = {
   user: User
@@ -51,14 +52,37 @@ export default class CrimeStatisticsContainer extends PureComponent<Props, State
   }
 
   renderCrimeTypeItem = (item: Array<Crime>, index: number) => {
+    let nrOfCrimes = item.length.toString()
+    if (index === 0) return this.renderFeaturedCrime(item[index], index, nrOfCrimes)
     return <View key={index}>
       <View style={styles.listItemwrapper}>
-        <TextView text={item.length.toString()} style={styles.number} />
+        <TextView text={nrOfCrimes} style={styles.number} />
         <TextView text={item[0].icon} style={styles.icon} />
         <TextView text={item[0].type} style={styles.type} />
       </View>
       <LineBreak />
     </View>
+  }
+
+  renderFeaturedCrime = (crime: Crime, index: number, nrOfCrimes: string): React$Element<View> => {
+    return <View key={index}>
+      <View style={styles.bigListItemwrapper}>
+        <TextView text={nrOfCrimes} style={styles.bigNumber} />
+        <TextView text={crime.icon} style={styles.bigIcon} />
+        <View style={styles.bigColumn}>
+          <TextView text={crime.type} style={styles.bigType} />
+          <TextView text={'Trendar i ' + this.getPopularCrimeArea()} style={styles.bigLocation} />
+        </View>
+      </View>
+      <LineBreak />
+    </View>
+  }
+
+  getPopularCrimeArea = (): string => {
+    let typeArrays = this.filterTypes()
+    if (!typeArrays) return ''
+    let locations: Array<string> = typeArrays[0].map(crime => crime.location.name)
+    return findOccurrence(locations)
   }
 
   filterTypes = (): Array<Array<Crime>> => {
@@ -98,5 +122,32 @@ const styles = StyleSheet.create({
   },
   type: {
     fontSize: 16
+  },
+  bigListItemwrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: commonStyles.space,
+    paddingBottom: commonStyles.space,
+    paddingTop: commonStyles.space * 2,
+    alignItems: 'center'
+  },
+  bigColumn: {
+    flexDirection: 'column',
+    marginLeft: commonStyles.space
+  },
+  bigLocation: {
+    fontSize: 14
+  },
+  bigNumber: {
+    fontSize: 20,
+    marginRight: commonStyles.smallSpace
+  },
+  bigIcon: {
+    fontSize: 22,
+    padding: commonStyles.smallSpace
+  },
+  bigType: {
+    fontSize: 20,
+    marginBottom: commonStyles.smallSpace
   }
 })

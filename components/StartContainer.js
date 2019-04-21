@@ -28,16 +28,30 @@ export default class StartContainer extends PureComponent<Props, State> {
 
   componentDidMount () {
     let {config} = Store.getState()
-    delay(500).then(() => firebase.auth().onAuthStateChanged(user => {
-      switch (true) {
-        case !!user: return goTo(HomeContainer, {user})
-        default: return goTo(SignUpContainer)
-      }
-    }))
-      .then(() => config.enableFirestore ? getCrimes().then(crimes => FirestoreActions.updateDB(crimes)) : undefined)
+    this.checkUserStatus()
+    if (config.enableFirestore) this.updateDatabase()
   }
 
   render (): React$Element<View> {
     return <View />
+  }
+
+  checkUserStatus = () => {
+    let {config} = Store.getState()
+    delay(500).then(() => {
+      if (!config.enableSignUp) return goTo(HomeContainer)
+      return firebase
+        .auth()
+        .onAuthStateChanged(user => {
+          switch (true) {
+            case !!user: return goTo(HomeContainer, {user})
+            default: return goTo(SignUpContainer)
+          }
+        })
+    })
+  }
+
+  updateDatabase = () => {
+    delay(500).then(() => getCrimes().then(crimes => FirestoreActions.updateDB(crimes)))
   }
 }

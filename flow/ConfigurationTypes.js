@@ -3,5 +3,6 @@ type ConfigurationTypes = {
   enableLanguageSupport: boolean,
   enableVibration: boolean,
   enableLogger: boolean,
-  enableFirestore: boolean
+  enableFirestore: boolean,
+  enableSignUp: boolean
 }
