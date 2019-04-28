@@ -1,14 +1,31 @@
 // @flow
 import {Component} from 'react'
+import {StyleSheet} from 'react-native'
 import {WebView} from 'react-native-webview'
 
-export default class ViewWeb extends Component<*> {
+type Props = {
+  url: string,
+  injectedJavaScript: *,
+  style: StyleSheet
+}
+
+export default class ViewWeb extends Component<Props> {
   render (): * {
-    return (
-      <WebView
-        source={{uri: 'https://polisen.se/aktuellt/handelser/2019/april/21/21-april-2228-sammanfattning-natt-vasterbottens-lan/'}}
-        style={{marginTop: 20}}
-      />
-    )
+    let {url, injectedJavaScript, style} = this.props
+    // let injectedJavaScript = `window.postMessage(document.querySelectorAll("text-body editorial-html")); true`
+    return <WebView
+      source={{uri: url}}
+      style={[styles.webview, style]}
+      injectedJavaScript={injectedJavaScript}
+      javaScriptEnabled
+      originWhitelist={['*']}
+    />
   }
 }
+
+const styles = StyleSheet.create({
+  webview: {
+    height: 200,
+    marginTop: 20
+  }
+})

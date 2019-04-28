@@ -11,9 +11,9 @@ import LineBreak from './LineBreak'
 import Fonts from '../libs/Fonts'
 import IconTextButton from './IconTextButton'
 import colors from '../libs/Colors'
-import ViewWeb from './ViewWeb'
 
-type State = {}
+type State = {
+}
 
 type Props = {
   crime: Crime
@@ -43,7 +43,6 @@ export default class SelectedCrimeContainer extends Component<Props, State> {
           {/* <TextView text={content} /> */}
         </View>
         <LineBreak />
-        <ViewWeb />
       </ScrollView>
     </View>
   }
