@@ -24,7 +24,8 @@ export default class HomeContainer extends PureComponent<Props, State> {
   static navigationOptions = (state: *) => ({
     ...getDefaultNavigationOptions(state),
     headerLeft: <View />,
-    headerStyle: commonStyles.invisibleHeader
+    headerStyle: commonStyles.invisibleHeader,
+    gesturesEnabled: false
   })
 
   render (): React$Element<View> {
