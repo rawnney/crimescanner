@@ -9,6 +9,7 @@ import commonStyles from '../libs/CommonStyles'
 import LineBreak from './LineBreak'
 import {findOccurrence, getPrevWeeksDates} from '../libs/Common'
 import {getAllCrimesForDates} from '../libs/FirestoreActions'
+import NoCrimesView from './NoCrimesView'
 
 type Props = {
   user: User
@@ -16,8 +17,8 @@ type Props = {
 
 type State = {
   crimes: Array<Crime>,
-  loading: boolean,
-  brand: Array<Crime>
+  isLoading: boolean,
+  isNoCrimes: boolean
 }
 
 export default class CrimeStatisticsContainer extends Component<Props, State> {
@@ -26,23 +27,22 @@ export default class CrimeStatisticsContainer extends Component<Props, State> {
     ...getDefaultNavigationOptions(state)
   })
 
-  state = {loading: true, crimes: [], brand: []}
+  state = {isLoading: true, crimes: [], isNoCrimes: false}
 
   componentDidMount () {
     let dates = getPrevWeeksDates()
-    getAllCrimesForDates(dates).then(res => this.setState({crimes: res, loading: false}))
-    // getCrimes().then(crimes => {
-    //   this.setState({crimes: crimes, loading: false})
-    // })
+    getAllCrimesForDates(dates).then(res => {
+      if (res.length === 0) this.setState({isNoCrimes: true})
+      this.setState({crimes: res, isLoading: false})
+    })
   }
 
   render (): React$Element<View> {
-    let {loading} = this.state
-    if (loading) return <LoadingView />
+    let {isLoading, isNoCrimes} = this.state
+    if (isLoading) return <LoadingView />
+    if (isNoCrimes) return <NoCrimesView />
     return <View style={styles.container}>
       <ScrollView>
-        {/* <TextView text={'Den här veckan'} />
-        <TextView text={'brand ' + brand.length} /> */}
         {this.renderCrimes()}
       </ScrollView>
     </View>

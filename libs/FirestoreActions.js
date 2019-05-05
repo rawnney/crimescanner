@@ -77,7 +77,7 @@ export let getCrimesForDate = (date: string): Promise<Array<Crime>> => {
     .catch(err => Logger.warn(err))
 }
 
-export let getAllCrimesForDates = (dates: Array<string>): * => {
+export let getAllCrimesForDates = (dates: Array<string>): Promise<Array<Crime>> => {
   let crimes = []
   return Promise.all(
     dates.map(date => getCrimesForDate(date)

@@ -17,6 +17,8 @@ type State = {
   user: ?User,
 }
 
+const LOADTIME = 200
+
 export default class StartContainer extends PureComponent<Props, State> {
   static routeName = 'StartContainer'
   static navigationOptions = (state: *) => ({
@@ -38,7 +40,7 @@ export default class StartContainer extends PureComponent<Props, State> {
 
   checkUserStatus = () => {
     let {config} = Store.getState()
-    delay(200).then(() => {
+    delay(LOADTIME).then(() => {
       if (!config.enableSignUp) return goTo(HomeContainer)
       return firebase
         .auth()
@@ -52,6 +54,9 @@ export default class StartContainer extends PureComponent<Props, State> {
   }
 
   updateDatabase = () => {
-    delay(500).then(() => getCrimes().then(crimes => FirestoreActions.updateDB(crimes)))
+    delay(LOADTIME)
+      .then(() => getCrimes()
+        .then(crimes => FirestoreActions
+          .updateDB(crimes)))
   }
 }
