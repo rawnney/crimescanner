@@ -9,7 +9,6 @@ import commonStyles from '../libs/CommonStyles'
 import LineBreak from './LineBreak'
 import {findOccurrence, getPrevWeeksDates} from '../libs/Common'
 import {getAllCrimesForDates} from '../libs/FirestoreActions'
-import Logger from '../libs/Logger'
 
 type Props = {
   user: User
@@ -39,7 +38,6 @@ export default class CrimeStatisticsContainer extends Component<Props, State> {
 
   render (): React$Element<View> {
     let {loading} = this.state
-    Logger.warn(this.state.crimes)
     if (loading) return <LoadingView />
     return <View style={styles.container}>
       <ScrollView>
