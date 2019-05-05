@@ -3,18 +3,7 @@ import firebase from 'react-native-firebase'
 import Logger from '../libs/Logger'
 import moment from './moment'
 
-const db = (collection: string) => firebase.firestore().collection(collection)
-
-export let getMurder = () => {
-  db.where('type', '==', 'mord')
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach(crime => Logger.warn(crime.id, ':', crime.data()))
-    })
-    .catch((error) => {
-      Logger.warn('Error getting documents: ', error)
-    })
-}
+const db = (collectionDate: string) => firebase.firestore().collection(collectionDate)
 
 export let bigUpdateDB = (crimes: Array<Crime>) => {
   let dates = []
@@ -63,4 +52,38 @@ export let addCrimeToCollection = (crime: Crime) => {
     .add(crime)
     .then(() => Logger.warn('Added crime', id, 'to collection', datetime))
     .catch(err => Logger.warn(err))
+}
+
+export let getCrimeTypeForDate = (date: string, type: string): Promise<Array<Crime>> => {
+  return db(date).where('type', '==', type).get()
+    .then(snapshot => snapshot.docs.map(doc => doc.data()))
+    .catch(err => Logger.warn(err))
+}
+
+export let getAllCrimeTypeForDates = (dates: Array<string>, type: string): Promise<Array<Crime>> => {
+  let crimes = []
+  return Promise.all(
+    dates.map(date => getCrimeTypeForDate(date, type)
+      .then(data => Promise.resolve(data))
+      .catch(err => Promise.reject(err))
+    ))
+    .then(res => Promise.all(res.map(r => crimes.push(...r))))
+    .then(() => Promise.resolve(crimes))
+}
+
+export let getCrimesForDate = (date: string): Promise<Array<Crime>> => {
+  return db(date).get()
+    .then(snapshot => snapshot.docs.map(doc => doc.data()))
+    .catch(err => Logger.warn(err))
+}
+
+export let getAllCrimesForDates = (dates: Array<string>): * => {
+  let crimes = []
+  return Promise.all(
+    dates.map(date => getCrimesForDate(date)
+      .then(data => Promise.resolve(data))
+      .catch(err => Promise.reject(err))
+    ))
+    .then(res => Promise.all(res.map(r => crimes.push(...r))))
+    .then(() => Promise.resolve(crimes))
 }

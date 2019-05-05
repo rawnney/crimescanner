@@ -1,14 +1,15 @@
 // @flow
-import {PureComponent} from 'react'
+import {Component} from 'react'
 import {View, StyleSheet, ScrollView} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
 import colors from '../libs/Colors'
-import {getCrimes} from '../libs/CrimeHelper'
 import TextView from './TextView'
 import LoadingView from './LoadingView'
 import commonStyles from '../libs/CommonStyles'
 import LineBreak from './LineBreak'
-import {findOccurrence} from '../libs/Common'
+import {findOccurrence, getPrevWeeksDates} from '../libs/Common'
+import {getAllCrimesForDates} from '../libs/FirestoreActions'
+import Logger from '../libs/Logger'
 
 type Props = {
   user: User
@@ -16,28 +17,34 @@ type Props = {
 
 type State = {
   crimes: Array<Crime>,
-  loading: boolean
+  loading: boolean,
+  brand: Array<Crime>
 }
 
-export default class CrimeStatisticsContainer extends PureComponent<Props, State> {
+export default class CrimeStatisticsContainer extends Component<Props, State> {
   static routeName = 'CrimeStatisticsContainer'
   static navigationOptions = (state: *) => ({
     ...getDefaultNavigationOptions(state)
   })
 
-  state = {loading: true, crimes: []}
+  state = {loading: true, crimes: [], brand: []}
 
   componentDidMount () {
-    getCrimes().then(crimes => {
-      this.setState({crimes: crimes, loading: false})
-    })
+    let dates = getPrevWeeksDates()
+    getAllCrimesForDates(dates).then(res => this.setState({crimes: res, loading: false}))
+    // getCrimes().then(crimes => {
+    //   this.setState({crimes: crimes, loading: false})
+    // })
   }
 
   render (): React$Element<View> {
     let {loading} = this.state
+    Logger.warn(this.state.crimes)
     if (loading) return <LoadingView />
     return <View style={styles.container}>
       <ScrollView>
+        {/* <TextView text={'Den här veckan'} />
+        <TextView text={'brand ' + brand.length} /> */}
         {this.renderCrimes()}
       </ScrollView>
     </View>
@@ -53,7 +60,7 @@ export default class CrimeStatisticsContainer extends PureComponent<Props, State
 
   renderCrimeTypeItem = (item: Array<Crime>, index: number) => {
     let nrOfCrimes = item.length.toString()
-    if (index === 0) return this.renderFeaturedCrime(item[index], index, nrOfCrimes)
+    // if (index === 0) return this.renderFeaturedCrime(item[index], index, nrOfCrimes)
     return <View key={index}>
       <View style={styles.listItemwrapper}>
         <TextView text={nrOfCrimes} style={styles.number} />
