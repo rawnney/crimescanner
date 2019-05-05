@@ -17,6 +17,7 @@ let Development = {
     ...baseFeatureConfig,
     enableLogger: true,
     enableFirestore: true,
+    enableAutoUpdateDB: true,
     enableSignUp: true
   }
 }

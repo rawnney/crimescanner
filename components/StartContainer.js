@@ -29,7 +29,7 @@ export default class StartContainer extends PureComponent<Props, State> {
   componentDidMount () {
     let {config} = Store.getState()
     this.checkUserStatus()
-    if (config.enableFirestore) this.updateDatabase()
+    if (config.enableAutoUpdateDB) this.updateDatabase()
   }
 
   render (): React$Element<View> {
@@ -38,7 +38,7 @@ export default class StartContainer extends PureComponent<Props, State> {
 
   checkUserStatus = () => {
     let {config} = Store.getState()
-    delay(500).then(() => {
+    delay(200).then(() => {
       if (!config.enableSignUp) return goTo(HomeContainer)
       return firebase
         .auth()
