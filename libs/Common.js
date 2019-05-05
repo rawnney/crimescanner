@@ -2,6 +2,7 @@
 import DeviceInfo from 'react-native-device-info'
 import {Platform, Vibration} from 'react-native'
 import Config from './Config'
+import moment, {formatTime} from './moment'
 
 export function isIOS (): boolean {
   return Platform.OS === 'ios'
@@ -99,4 +100,16 @@ export let keyExtractor = (item: Object, index: number) => index.toString()
 
 export let findOccurrence = (arr: Array<*>): * => {
   return arr.sort((a, b) => arr.filter(v => v === a).length - arr.filter(v => v === b).length).pop()
+}
+
+export let getPrevWeeksDates = (): Array<string> => {
+  var startOfWeek = moment().startOf('isoWeek')
+  var endOfWeek = moment().endOf('isoWeek')
+  var days = []
+  var day = startOfWeek
+  while (day <= endOfWeek) {
+    days.push(formatTime(day.toDate()))
+    day = day.clone().add(1, 'd')
+  }
+  return days
 }
