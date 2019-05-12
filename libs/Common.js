@@ -98,7 +98,7 @@ export let vibrationFeedback = (pattern?: Array<number>): Promise<Function> => {
 
 export let keyExtractor = (item: Object, index: number) => index.toString()
 
-export let findOccurrence = (arr: Array<*>): * => {
+export let findOccurrence = (arr: Array<*>): string => {
   return arr.sort((a, b) => arr.filter(v => v === a).length - arr.filter(v => v === b).length).pop()
 }
 

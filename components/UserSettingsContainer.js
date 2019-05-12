@@ -30,10 +30,18 @@ class UserSettingsContainer extends PureComponent<Props, State> {
     return <View style={styles.container}>
       <View style={styles.wrapper}>
         <RowSwitch text='Dark mode' value={appState.isDarkMode} onValueChange={this.toggleDarkMode} />
-        <IconTextButton text='Signout' name={SIGNOUT} onPress={this.logoutUser} />
-        <IconTextButton text='Delete account' name={DELETE} onPress={this.goToDeleteAccountContainer} />
+        {this.renderAuthenticationOptions()}
         {this.renderDevSettings()}
       </View>
+    </View>
+  }
+
+  renderAuthenticationOptions = () => {
+    let {config} = Store.getState()
+    if (!config.enableSignUp) return <View />
+    return <View>
+      <IconTextButton text='Signout' name={SIGNOUT} onPress={this.logoutUser} />
+      <IconTextButton text='Delete account' name={DELETE} onPress={this.goToDeleteAccountContainer} />
     </View>
   }
 
@@ -46,9 +54,7 @@ class UserSettingsContainer extends PureComponent<Props, State> {
 
   toggleLogger = (enableLogger: boolean) => Store.dispatch(Actions.changeAppState({enableLogger: enableLogger}))
   toggleDarkMode = (isDarkMode: boolean) => Store.dispatch(Actions.changeAppState({isDarkMode: isDarkMode}))
-
   logoutUser = () => AuthActions.signOutUser()
-
   goToDeleteAccountContainer = () => goTo(DeleteAccountContainer)
 }
 

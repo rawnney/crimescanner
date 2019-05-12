@@ -3,7 +3,6 @@
 let baseFeatureConfig = {
   enableLanguageSupport: false,
   enableVibration: false,
-  enableLogger: false,
   enableFirestore: false,
   enableSignUp: false
 }
@@ -15,10 +14,9 @@ let Development = {
   name: 'Development',
   features: {
     ...baseFeatureConfig,
-    enableLogger: true,
     enableFirestore: true,
     enableAutoUpdateDB: true,
-    enableSignUp: true
+    enableSignUp: false
   }
 }
 
@@ -27,7 +25,6 @@ let Production = {
   name: 'Production',
   features: {
     ...baseFeatureConfig,
-    enableLogger: false,
     enableFirestore: true,
     enableSignUp: false
   }
