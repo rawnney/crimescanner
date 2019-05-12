@@ -7,7 +7,6 @@ import commonStyles from '../libs/CommonStyles'
 import RowSwitch from './RowSwitch'
 import Store from '../libs/Store'
 import * as Actions from '../libs/Actions'
-import getColorTheme from '../libs/getColorTheme'
 import {connect} from 'react-redux'
 import * as AuthActions from '../libs/AuthActions'
 import IconTextButton from './IconTextButton'
@@ -27,16 +26,25 @@ class UserSettingsContainer extends PureComponent<Props, State> {
   })
 
   render (): React$Element<View> {
-    let isDarkMode = getColorTheme().isDarkMode
+    let {appState} = Store.getState()
     return <View style={styles.container}>
       <View style={styles.wrapper}>
-        <RowSwitch text='Dark mode' value={isDarkMode} onValueChange={this.toggleDarkMode} />
+        <RowSwitch text='Dark mode' value={appState.isDarkMode} onValueChange={this.toggleDarkMode} />
         <IconTextButton text='Signout' name={SIGNOUT} onPress={this.logoutUser} />
         <IconTextButton text='Delete account' name={DELETE} onPress={this.goToDeleteAccountContainer} />
+        {this.renderDevSettings()}
       </View>
     </View>
   }
 
+  renderDevSettings = () => {
+    let {appState} = Store.getState()
+    return <View>
+      <RowSwitch text='Enable logger' value={appState.enableLogger} onValueChange={this.toggleLogger} />
+    </View>
+  }
+
+  toggleLogger = (enableLogger: boolean) => Store.dispatch(Actions.changeAppState({enableLogger: enableLogger}))
   toggleDarkMode = (isDarkMode: boolean) => Store.dispatch(Actions.changeAppState({isDarkMode: isDarkMode}))
 
   logoutUser = () => AuthActions.signOutUser()

@@ -1,7 +1,8 @@
 // @flow
 let defaultState = {
   appState: {
-    isDarkMode: false
+    isDarkMode: false,
+    enableLogger: false
   }
 }
 
