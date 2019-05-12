@@ -30,8 +30,8 @@ export default class StartContainer extends PureComponent<Props, State> {
 
   componentDidMount () {
     let {config} = Store.getState()
-    this.checkUserStatus()
     if (config.enableAutoUpdateDB) this.updateDatabase()
+    this.checkUserStatus()
   }
 
   render (): React$Element<View> {
