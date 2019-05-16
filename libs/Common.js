@@ -102,9 +102,9 @@ export let findOccurrence = (arr: Array<*>): string => {
   return arr.sort((a, b) => arr.filter(v => v === a).length - arr.filter(v => v === b).length).pop()
 }
 
-export let getPrevWeeksDates = (): Array<string> => {
-  var startOfWeek = moment().startOf('isoWeek')
-  var endOfWeek = moment().endOf('isoWeek')
+export let getPrevWeeksDates = (date: *): Array<string> => {
+  var startOfWeek = moment(date).startOf('isoWeek')
+  var endOfWeek = moment(date).endOf('isoWeek')
   var days = []
   var day = startOfWeek
   while (day <= endOfWeek) {

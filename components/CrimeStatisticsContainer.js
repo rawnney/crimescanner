@@ -10,6 +10,7 @@ import LineBreak from './LineBreak'
 import {findOccurrence, getPrevWeeksDates} from '../libs/Common'
 import {getAllCrimesForDates} from '../libs/FirestoreActions'
 import NoCrimesView from './NoCrimesView'
+import moment from '../libs/moment'
 
 type Props = {
   user: User
@@ -18,7 +19,8 @@ type Props = {
 type State = {
   crimes: Array<Crime>,
   isLoading: boolean,
-  isNoCrimes: boolean
+  isNoCrimes: boolean,
+  date: *
 }
 
 export default class CrimeStatisticsContainer extends Component<Props, State> {
@@ -27,10 +29,11 @@ export default class CrimeStatisticsContainer extends Component<Props, State> {
     ...getDefaultNavigationOptions(state)
   })
 
-  state = {isLoading: true, crimes: [], isNoCrimes: false}
+  state = {isLoading: true, crimes: [], isNoCrimes: false, date: moment()}
 
   componentDidMount () {
-    let dates = getPrevWeeksDates()
+    let {date} = this.state
+    let dates = getPrevWeeksDates(date)
     getAllCrimesForDates(dates).then(res => {
       if (res.length === 0) this.setState({isNoCrimes: true})
       this.setState({crimes: res, isLoading: false})
