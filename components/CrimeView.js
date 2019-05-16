@@ -11,20 +11,23 @@ type Props = {
   crimes: Array<Object>,
   isLoading: boolean,
   onPressCrime: Function,
-  isCrimes: boolean
+  isCrimes: boolean,
+  ListFooterComponent?: *
 }
 
 type State = {}
 
 export default class CrimeView extends PureComponent<Props, State> {
   render (): React$Element<View> {
-    let {crimes, isLoading} = this.props
+    let {crimes, isLoading, ListFooterComponent} = this.props
     if (isLoading) return <LoadingView />
     return <View style={styles.container}>
       <FlatList
         data={crimes}
+        extraData={crimes}
         renderItem={this.renderCrimeItem}
         ListEmptyComponent={this.renderEmptyState}
+        ListFooterComponent={ListFooterComponent}
         keyExtractor={keyExtractor}
         contentContainerStyle={styles.contentContainerStyle}
       />

@@ -1,15 +1,19 @@
 // @flow
+/* eslint-disable react/jsx-no-bind */
 import {PureComponent} from 'react'
-import {View} from 'react-native'
+import {View} from 'react-native' // ActivityIndicator
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
 import {getCrimesNearLocation} from '../libs/CrimeHelper'
 import {getPosition} from '../libs/PositionHelper'
+import {goTo} from '../libs/AppNavigation'
+// import {RECYCLE} from '../consts/Icons'
+// import colors from '../libs/Colors'
+// import IconTextButton from './IconTextButton'
 import LoadingView from './LoadingView'
 import CrimeView from './CrimeView'
 import * as PermissionsHelper from '../libs/PermissionHelper'
 import PermissionView from './PermissionView'
 import SelectedCrimeContainer from './SelectedCrimeContainer'
-import {goTo} from '../libs/AppNavigation'
 
 type Props = {
   user: User
@@ -21,6 +25,7 @@ type State = {
   isLoading: boolean,
   isCrimes: boolean,
   hasPermission: boolean
+  // isLoadingMore: boolean
 }
 
 export default class CrimesNearContainer extends PureComponent<Props, State> {
@@ -37,6 +42,7 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
       isLoading: false,
       isCrimes: true,
       hasPermission: false
+      // isLoadingMore: false
     }
   }
 
@@ -53,8 +59,15 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
       isLoading={isLoading}
       isCrimes={isCrimes}
       onPressCrime={this.onPressCrime}
+      // ListFooterComponent={() => this.renderListFooter()}
     />
   }
+
+  // renderListFooter = () => {
+  //   let {isLoadingMore} = this.state
+  //   if (isLoadingMore) return <ActivityIndicator style={{}} tintColor={colors.black} size='small' /> // <IconTextButton onPress={() => {}} text='Laddar...' name={RECYCLE} color={colors.gray} />
+  //   return <IconTextButton onPress={() => this.setState({isLoadingMore: true})} text='Se äldre brott' name={RECYCLE} color={colors.gray} />
+  // }
 
   setPositionAndCrimes = () => {
     this.setState({isLoading: true})

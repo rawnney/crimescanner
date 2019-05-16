@@ -21,5 +21,6 @@ module.exports = {
   PLUS: Icons.plus,
   SIGNOUT: Icons.signOutAlt,
   DELETE: Icons.trash,
-  ARROW_CIRCLE_RIGHT: Icons.arrowAltCircleRight
+  ARROW_CIRCLE_RIGHT: Icons.arrowAltCircleRight,
+  RECYCLE: Icons.recycle
 }
