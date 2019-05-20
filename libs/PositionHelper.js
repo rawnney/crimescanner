@@ -6,10 +6,11 @@ import Logger from './Logger'
 const COORD_LENGTH = 5
 
 let formatPosition = (pos: Object): Object => {
-  let {coords} = pos
+  let {coords, name} = pos
   return {
     longitude: coords.longitude.toString().substring(0, COORD_LENGTH),
-    latitude: coords.latitude.toString().substring(0, COORD_LENGTH)
+    latitude: coords.latitude.toString().substring(0, COORD_LENGTH),
+    name
   }
 }
 

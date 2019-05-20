@@ -1,17 +1,19 @@
 // @flow
 /* eslint-disable react/jsx-no-bind */
 import {PureComponent} from 'react'
-import {View} from 'react-native' // ActivityIndicator
+import {View, StyleSheet, ActivityIndicator} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
 import {getCrimesNearLocation} from '../libs/CrimeHelper'
 import {getPosition} from '../libs/PositionHelper'
 import {goTo} from '../libs/AppNavigation'
-// import {RECYCLE} from '../consts/Icons'
-// import colors from '../libs/Colors'
-// import IconTextButton from './IconTextButton'
+import {getOneDayEarlier} from '../libs/Common'
+import {SYNC_ALT} from '../consts/Icons'
+import colors from '../libs/Colors'
+import IconTextButton from './IconTextButton'
 import LoadingView from './LoadingView'
 import CrimeView from './CrimeView'
 import * as PermissionsHelper from '../libs/PermissionHelper'
+import * as FirestoreActions from '../libs/FirestoreActions'
 import PermissionView from './PermissionView'
 import SelectedCrimeContainer from './SelectedCrimeContainer'
 
@@ -24,8 +26,8 @@ type State = {
   crimes: Array<Crime>,
   isLoading: boolean,
   isCrimes: boolean,
-  hasPermission: boolean
-  // isLoadingMore: boolean
+  hasPermission: boolean,
+  isLoadingMore: boolean
 }
 
 export default class CrimesNearContainer extends PureComponent<Props, State> {
@@ -42,8 +44,8 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
       position: null,
       isLoading: false,
       isCrimes: true,
-      hasPermission: false
-      // isLoadingMore: false
+      hasPermission: false,
+      isLoadingMore: false
     }
   }
 
@@ -60,15 +62,26 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
       isLoading={isLoading}
       isCrimes={isCrimes}
       onPressCrime={this.onPressCrime}
-      // ListFooterComponent={() => this.renderListFooter()}
+      ListFooterComponent={() => this.renderListFooter()}
     />
   }
 
-  // renderListFooter = () => {
-  //   let {isLoadingMore} = this.state
-  //   if (isLoadingMore) return <ActivityIndicator style={{}} tintColor={colors.black} size='small' /> // <IconTextButton onPress={() => {}} text='Laddar...' name={RECYCLE} color={colors.gray} />
-  //   return <IconTextButton onPress={() => this.setState({isLoadingMore: true})} text='Se äldre brott' name={RECYCLE} color={colors.gray} />
-  // }
+  renderListFooter = () => {
+    let {isLoadingMore} = this.state
+    if (isLoadingMore) return <ActivityIndicator tintColor={colors.black} size='small' style={styles.footer} />
+    return <IconTextButton onPress={this.onPressLoadMore} text='Se äldre brott' name={SYNC_ALT} color={colors.gray} style={styles.footer} />
+  }
+
+  onPressLoadMore = () => {
+    let {crimes, position} = this.state
+    let date = getOneDayEarlier(crimes)
+    let newCrimes = []
+    this.setState({isLoadingMore: true})
+    FirestoreActions.getCrimesForDate(date)
+      .then(data => data.filter(crime => crime.location.name === position.name))
+      .then((data) => newCrimes = crimes.concat(data))
+      .finally((data) => this.setState({crimes: newCrimes, isLoadingMore: false}))
+  }
 
   setPositionAndCrimes = () => {
     this.setState({isLoading: true})
@@ -105,3 +118,9 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
 
   openPermissions = () => PermissionsHelper.openPermissionSettings()
 }
+
+const styles = StyleSheet.create({
+  footer: {
+    minHeight: 60
+  }
+})

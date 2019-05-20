@@ -113,3 +113,10 @@ export let getPrevWeeksDates = (date: *): Array<string> => {
   }
   return days
 }
+
+export let getOneDayEarlier = (crimes: Array<Crime>): string => {
+  let latestDate = crimes.length !== 0 ? crimes[crimes.length - 1].datetime : ''
+  if (!latestDate) return ''
+  let minusOneDay = moment(latestDate).subtract(1, 'day')
+  return formatTime(minusOneDay)
+}
