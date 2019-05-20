@@ -53,16 +53,18 @@ const styles = StyleSheet.create({
   },
   headerLeft: {
     top: 10,
+    minWidth: 30,
     alignItems: 'flex-start'
   },
   headerRight: {
     top: 10,
+    minWidth: 30,
     alignItems: 'flex-end'
   },
   title: {
     top: 10,
-    right: 10,
     fontSize: 20,
+    alignItems: 'center',
     textAlign: 'center',
     fontWeight: '600'
   }
