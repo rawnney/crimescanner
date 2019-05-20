@@ -63,21 +63,21 @@ export default class CrimeStatisticsContainer extends Component<Props, State> {
     </View>
   }
 
+  /* eslint-disable react/jsx-no-bind */
   renderCrimeTypeItem = (item: Array<Crime>, index: number) => {
     let nrOfCrimes = item.length.toString()
-    if (index === 0) return this.renderFeaturedCrime(item[index], index, nrOfCrimes)
-    return <View key={index}>
+    if (index === 0) return this.renderFeaturedCrime(item[0], index, nrOfCrimes)
+    return <ButtonWrapper onPress={() => this.onPressItem(item[0])} key={index}>
       <View style={styles.listItemwrapper}>
         <TextView text={nrOfCrimes} style={styles.number} />
         <TextView text={item[0].icon} style={styles.icon} />
         <TextView text={item[0].type} style={styles.type} />
       </View>
       <LineBreak />
-    </View>
+    </ButtonWrapper>
   }
 
   renderFeaturedCrime = (crime: Crime, index: number, nrOfCrimes: string): React$Element<View> => {
-  /* eslint-disable react/jsx-no-bind */
     return <ButtonWrapper onPress={() => this.onPressItem(crime)} key={index}>
       <View style={styles.bigListItemwrapper}>
         <TextView text={nrOfCrimes} style={styles.bigNumber} />
@@ -92,11 +92,12 @@ export default class CrimeStatisticsContainer extends Component<Props, State> {
   }
   /* eslint-enable react/jsx-no-bind */
 
-  onPressItem = (crime: Crime) => { // Promise<Object>
+  onPressItem = (crime: Crime): Promise<Object> => {
     let {crimes} = this.state
+    if (!crime) return Promise.reject(crime)
     let {type} = crime
     let filteredCrimes = crimes.filter(crime => crime.type === type)
-    return goTo(CrimeStatisticsExtendedContainer, {filteredCrimes})
+    return goTo(CrimeStatisticsExtendedContainer, {crimes: filteredCrimes})
   }
 
   getPopularCrimeArea = (): string => {
@@ -114,7 +115,7 @@ export default class CrimeStatisticsContainer extends Component<Props, State> {
     })
 
     let typeArrays = []
-    types.forEach(type => {
+    types.map(type => {
       let filteredCrimes = crimes.filter(crime => crime.type === type)
       if (!typeArrays.includes(filteredCrimes)) typeArrays.push(filteredCrimes)
     })
@@ -135,7 +136,8 @@ const styles = StyleSheet.create({
   },
   number: {
     fontSize: 16,
-    marginRight: commonStyles.smallSpace
+    marginRight: commonStyles.smallSpace,
+    minWidth: 20
   },
   icon: {
     fontSize: 16,
@@ -161,7 +163,8 @@ const styles = StyleSheet.create({
   },
   bigNumber: {
     fontSize: 20,
-    marginRight: commonStyles.smallSpace
+    marginRight: commonStyles.smallSpace,
+    minWidth: 20
   },
   bigIcon: {
     fontSize: 22,

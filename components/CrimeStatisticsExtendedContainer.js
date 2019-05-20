@@ -10,7 +10,6 @@ type State = {
 }
 
 type Props = {
-  user: ?User,
   crimes: Array<Crime>
 }
 
@@ -27,12 +26,8 @@ export default class CrimeStatisticsExtendedContainer extends Component<Props, S
       isLoading={false}
       isCrimes
       onPressCrime={this.onPressCrime}
-    // ListFooterComponent={() => this.renderListFooter()}
     />
   }
 
-  onPressCrime = (crime: Crime) => {
-    let {user} = this.props
-    goTo(SelectedCrimeContainer, {crime, user})
-  }
+  onPressCrime = (crime: Crime) => goTo(SelectedCrimeContainer, {crime})
 }
