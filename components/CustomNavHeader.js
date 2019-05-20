@@ -6,6 +6,7 @@ import {STATUS_BAR_DARK} from '../libs/Consts'
 import {hasNotch} from '../libs/Common'
 import BackButton from './BackButton'
 import commonStyles from '../libs/CommonStyles'
+import TextView from './TextView'
 
 type Props = {
   scene: {
@@ -22,12 +23,13 @@ export default class CustomNavHeader extends Component<Props, State> {
     let {scene} = this.props
     let {options} = scene.descriptor
     if (!options) return <View style={styles.container} />
-    let {headerRight, headerLeft, headerStyle, headerBarTint} = options
+    let {headerRight, headerLeft, headerStyle, headerBarTint, title} = options
     return <View style={[styles.container, hasNotch() ? styles.notch : undefined, headerStyle]}>
       <StatusBar barStyle={headerBarTint || STATUS_BAR_DARK} />
       <View style={styles.headerLeft}>
         {headerLeft || <BackButton />}
       </View>
+      {title ? <TextView text={title} style={styles.title} /> : <View />}
       <View style={styles.headerRight}>
         {headerRight}
       </View>
@@ -56,5 +58,12 @@ const styles = StyleSheet.create({
   headerRight: {
     top: 10,
     alignItems: 'flex-end'
+  },
+  title: {
+    top: 10,
+    right: 10,
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: '600'
   }
 })

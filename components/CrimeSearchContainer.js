@@ -26,7 +26,8 @@ type State = {
 export default class CrimeSearchContainer extends PureComponent<Props, State> {
   static routeName = 'CrimeSearchContainer'
   static navigationOptions = (state: *) => ({
-    ...getDefaultNavigationOptions(state)
+    ...getDefaultNavigationOptions(state),
+    title: 'Sök'
   })
   state = {crimes: [], isLoading: false, text: '', isCrimes: true, showHintText: true}
   render (): React$Element<View> {

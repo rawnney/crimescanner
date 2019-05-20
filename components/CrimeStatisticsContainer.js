@@ -2,15 +2,18 @@
 import {Component} from 'react'
 import {View, StyleSheet, ScrollView} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
+import {findOccurrence, getPrevWeeksDates} from '../libs/Common'
+import {getAllCrimesForDates} from '../libs/FirestoreActions'
+import {goTo} from '../libs/AppNavigation'
 import colors from '../libs/Colors'
 import TextView from './TextView'
 import LoadingView from './LoadingView'
 import commonStyles from '../libs/CommonStyles'
 import LineBreak from './LineBreak'
-import {findOccurrence, getPrevWeeksDates} from '../libs/Common'
-import {getAllCrimesForDates} from '../libs/FirestoreActions'
 import NoCrimesView from './NoCrimesView'
 import moment from '../libs/moment'
+import ButtonWrapper from './ButtonWrapper'
+import CrimeStatisticsExtendedContainer from './CrimeStatisticsExtendedContainer'
 
 type Props = {
   user: User
@@ -26,7 +29,8 @@ type State = {
 export default class CrimeStatisticsContainer extends Component<Props, State> {
   static routeName = 'CrimeStatisticsContainer'
   static navigationOptions = (state: *) => ({
-    ...getDefaultNavigationOptions(state)
+    ...getDefaultNavigationOptions(state),
+    title: 'Veckans brott'
   })
 
   state = {isLoading: true, crimes: [], isNoCrimes: false, date: moment()}
@@ -61,7 +65,7 @@ export default class CrimeStatisticsContainer extends Component<Props, State> {
 
   renderCrimeTypeItem = (item: Array<Crime>, index: number) => {
     let nrOfCrimes = item.length.toString()
-    // if (index === 0) return this.renderFeaturedCrime(item[index], index, nrOfCrimes)
+    if (index === 0) return this.renderFeaturedCrime(item[index], index, nrOfCrimes)
     return <View key={index}>
       <View style={styles.listItemwrapper}>
         <TextView text={nrOfCrimes} style={styles.number} />
@@ -73,7 +77,8 @@ export default class CrimeStatisticsContainer extends Component<Props, State> {
   }
 
   renderFeaturedCrime = (crime: Crime, index: number, nrOfCrimes: string): React$Element<View> => {
-    return <View key={index}>
+  /* eslint-disable react/jsx-no-bind */
+    return <ButtonWrapper onPress={() => this.onPressItem(crime)} key={index}>
       <View style={styles.bigListItemwrapper}>
         <TextView text={nrOfCrimes} style={styles.bigNumber} />
         <TextView text={crime.icon} style={styles.bigIcon} />
@@ -83,7 +88,15 @@ export default class CrimeStatisticsContainer extends Component<Props, State> {
         </View>
       </View>
       <LineBreak />
-    </View>
+    </ButtonWrapper>
+  }
+  /* eslint-enable react/jsx-no-bind */
+
+  onPressItem = (crime: Crime) => { // Promise<Object>
+    let {crimes} = this.state
+    let {type} = crime
+    let filteredCrimes = crimes.filter(crime => crime.type === type)
+    return goTo(CrimeStatisticsExtendedContainer, {filteredCrimes})
   }
 
   getPopularCrimeArea = (): string => {

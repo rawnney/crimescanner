@@ -31,7 +31,8 @@ type State = {
 export default class CrimesNearContainer extends PureComponent<Props, State> {
   static routeName = 'CrimesNearContainer'
   static navigationOptions = (state: *) => ({
-    ...getDefaultNavigationOptions(state)
+    ...getDefaultNavigationOptions(state),
+    title: 'Nära dig'
   })
 
   constructor (props: Props) {

@@ -29,6 +29,6 @@ export let styles = StyleSheet.create({
     padding: 30
   },
   text: {
-    fontSize: 25
+    fontSize: 20
   }
 })

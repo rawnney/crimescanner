@@ -26,7 +26,7 @@ export default class CrimeListItem extends Component <Props> {
         </View>
         <TextView text={name} style={styles.location} />
         <TextView text={displayTime} style={styles.date} />
-        <TextView text={summary} />
+        <TextView text={summary} style={styles.summary} />
       </View>
       <LineBreak />
     </ButtonWrapper>
@@ -62,5 +62,8 @@ export let styles = StyleSheet.create({
     ...Fonts.light,
     fontSize: 16,
     marginBottom: commonStyles.smallSpace
+  },
+  summary: {
+    maxWidth: '85%'
   }
 })
