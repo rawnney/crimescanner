@@ -4,5 +4,6 @@ type ConfigurationTypes = {
   enableVibration: boolean,
   enableFirestore: boolean,
   enableAutoUpdateDB: boolean,
-  enableSignUp: boolean
+  enableSignUp: boolean,
+  enablePolisenWebView: boolean
 }

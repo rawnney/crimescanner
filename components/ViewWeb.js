@@ -5,27 +5,31 @@ import {WebView} from 'react-native-webview'
 
 type Props = {
   url: string,
-  injectedJavaScript: *,
-  style: StyleSheet
+  injectedJavaScript?: *,
+  style?: StyleSheet,
+  useWebKit?: boolean,
+  startInLoadingState?: boolean
 }
 
 export default class ViewWeb extends Component<Props> {
   render (): * {
-    let {url, injectedJavaScript, style} = this.props
-    // let injectedJavaScript = `window.postMessage(document.querySelectorAll("text-body editorial-html")); true`
+    let {url, injectedJavaScript, style, useWebKit, startInLoadingState} = this.props
     return <WebView
       source={{uri: url}}
-      style={[styles.webview, style]}
+      style={[styles.webView, style]}
       injectedJavaScript={injectedJavaScript}
       javaScriptEnabled
       originWhitelist={['*']}
+      useWebKit={useWebKit}
+      thirdPartyCookiesEnabled={false}
+      startInLoadingState={startInLoadingState || true}
     />
   }
 }
 
 const styles = StyleSheet.create({
-  webview: {
-    height: 200,
-    marginTop: 20
+  webView: {
+    width: '100%',
+    overflow: 'hidden'
   }
 })

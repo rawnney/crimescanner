@@ -16,6 +16,8 @@ import * as PermissionsHelper from '../libs/PermissionHelper'
 import * as FirestoreActions from '../libs/FirestoreActions'
 import PermissionView from './PermissionView'
 import SelectedCrimeContainer from './SelectedCrimeContainer'
+import CrimeWebContainer from './CrimeWebContainer'
+import Store from '../libs/Store'
 
 type Props = {
   user: User
@@ -114,7 +116,12 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
       })
   }
 
-  onPressCrime = (crime: Crime) => goTo(SelectedCrimeContainer, {crime})
+  onPressCrime = (crime: Crime): Promise<Object> => {
+    let {config} = Store.getState()
+    let {url} = crime
+    if (config.enablePolisenWebView) return goTo(CrimeWebContainer, {url})
+    return goTo(SelectedCrimeContainer, {crime})
+  }
 
   openPermissions = () => PermissionsHelper.openPermissionSettings()
 }

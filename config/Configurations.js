@@ -4,7 +4,8 @@ let baseFeatureConfig = {
   enableLanguageSupport: false,
   enableVibration: false,
   enableFirestore: false,
-  enableSignUp: false
+  enableSignUp: false,
+  enablePolisenWebView: true
 }
 
 let baseConfiguration = {}

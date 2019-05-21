@@ -1,4 +1,5 @@
 // @flow
+import {Dimensions} from 'react-native'
 import {isIOS} from '../libs/Common'
 import colors from '../libs/Colors'
 
@@ -9,6 +10,8 @@ let navbarHeight = isIOS() ? 45 : 56
 let iosStatusBarHeight = isIOS() ? 20 : 0
 let navBarHeightAndStatusBarHeight = navbarHeight + iosStatusBarHeight
 let notchSpace = space * 2
+let vHeight = Dimensions.get('window').height
+let vWidth = Dimensions.get('window').width
 export default {
   space,
   smallSpace,
@@ -16,6 +19,8 @@ export default {
   navbarHeight,
   navBarHeightAndStatusBarHeight,
   notchSpace,
+  vHeight,
+  vWidth,
   invisibleHeader: {
     width: '100%',
     backgroundColor: colors.transparent,
