@@ -2,9 +2,11 @@
 import React, {Component} from 'react'
 import {View} from 'react-native'
 import {getDefaultNavigationOptions} from '../libs/getDefaultNavigationOptions'
+import {goTo} from '../libs/AppNavigation'
 import CrimeView from './CrimeView'
 import SelectedCrimeContainer from './SelectedCrimeContainer'
-import {goTo} from '../libs/AppNavigation'
+import CrimeWebContainer from './CrimeWebContainer'
+import Store from '../libs/Store'
 
 type State = {
 }
@@ -29,5 +31,10 @@ export default class CrimeStatisticsExtendedContainer extends Component<Props, S
     />
   }
 
-  onPressCrime = (crime: Crime) => goTo(SelectedCrimeContainer, {crime})
+  onPressCrime = (crime: Crime): Promise<Object> => {
+    let {config} = Store.getState()
+    let {url} = crime
+    if (config.enablePolisenWebView) return goTo(CrimeWebContainer, {url})
+    return goTo(SelectedCrimeContainer, {crime})
+  }
 }
