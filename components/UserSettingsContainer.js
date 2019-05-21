@@ -13,6 +13,8 @@ import IconTextButton from './IconTextButton'
 import {SIGNOUT, DELETE} from '../consts/Icons'
 import {goTo} from '../libs/AppNavigation'
 import DeleteAccountContainer from './DeleteAccountContainer'
+import CrimeSectionHeader from './CrimeSectionHeader'
+import LineBreak from './LineBreak'
 
 type Props = {
   user: User
@@ -48,6 +50,8 @@ class UserSettingsContainer extends PureComponent<Props, State> {
   renderDevSettings = () => {
     let {appState} = Store.getState()
     return <View>
+      <LineBreak />
+      <CrimeSectionHeader text={'Devsettings'} />
       <RowSwitch text='Enable logger' value={appState.enableLogger} onValueChange={this.toggleLogger} />
     </View>
   }

@@ -22,9 +22,9 @@ export default class CrimeSectionHeader extends PureComponent<Props, State> {
 const styles = StyleSheet.create({
   header: {
     width: '100%',
-    backgroundColor: colors.deepSparkle,
     padding: commonStyles.space,
-    fontSize: 16,
-    color: colors.white
+    fontSize: 20,
+    fontWeight: '600',
+    color: colors.black
   }
 })
