@@ -78,7 +78,7 @@ export default class CrimesNearContainer extends PureComponent<Props, State> {
     let newCrimes = []
     this.setState({isLoadingMore: true})
     FirestoreActions.getCrimesForDate(date)
-      .then(data => data.filter(crime => crime.location.name === position.name))
+      .then(data => data.filter(crime => crime.location.name.includes(position.name)))
       .then((data) => newCrimes = crimes.concat(data))
       .finally((data) => this.setState({crimes: newCrimes, isLoadingMore: false}))
   }
